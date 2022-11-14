@@ -1,5 +1,9 @@
+# Libs publiques
 import pygame
 from pygame.locals import Rect
+
+# Libs locales
+import const
 
 class CharManager():
     """ A class for managing a character on a pygame surface
@@ -33,6 +37,9 @@ class CharManager():
         v_px_per_unit = self._fen.get_height() / 10
 
         pos_in_pixels = (self._position_perso_unit[0] * h_px_per_unit, self._position_perso_unit[1] * v_px_per_unit)
-        self._fen.blit(self._perso, (*pos_in_pixels, self._fen.get_width(), self._fen.get_height()))
+
+        editable_perso = self._perso.copy()
+        editable_perso = pygame.transform.scale(editable_perso, (int(h_px_per_unit*const.PERSO_H_SCALE), int(v_px_per_unit*const.PERSO_V_SCALE)))
+        self._fen.blit(editable_perso, pos_in_pixels)
 
         return self

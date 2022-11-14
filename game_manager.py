@@ -12,7 +12,8 @@ class GameManager():
         #Initialisation
         pygame.init()
         pygame.display.set_caption("Pygame Window")
-        self.fen = pygame.display.set_mode(const.RESOLUTION, pl.RESIZABLE)
+        self.fen = pygame.display.set_mode(const.RESOLUTION, pl.FULLSCREEN)
+        pygame.key.set_repeat(500, 500)
         self._is_started = False
 
         # Chargement des ressources
