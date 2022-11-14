@@ -3,6 +3,10 @@ RESOLUTION = (1280, 720)
 PERSO_H_SCALE = 0.5
 PERSO_V_SCALE = 0.8
 
+# Map
+MAP_HEIGHT = 10
+MAP_WIDTH = 10
+
 # Controles
 UP=(0,-1)
 DOWN=(0,1)

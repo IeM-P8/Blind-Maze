@@ -33,8 +33,8 @@ class CharManager():
         return self
 
     def blit(self):
-        h_px_per_unit = self._fen.get_width() / 10
-        v_px_per_unit = self._fen.get_height() / 10
+        h_px_per_unit = self._fen.get_width() / const.MAP_WIDTH
+        v_px_per_unit = self._fen.get_height() / const.MAP_HEIGHT
 
         pos_in_pixels = (self._position_perso_unit[0] * h_px_per_unit, self._position_perso_unit[1] * v_px_per_unit)
 
