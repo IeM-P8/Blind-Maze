@@ -3,6 +3,7 @@ import pygame
 import pygame.locals as pl
 
 # Libs locales
+import const
 import char_manager
 import bind_manager
 
@@ -11,31 +12,38 @@ class GameManager():
         #Initialisation
         pygame.init()
         pygame.display.set_caption("Pygame Window")
-        self.fen = pygame.display.set_mode((1280, 720), pl.FULLSCREEN)
-        self.is_started = False
+        self.fen = pygame.display.set_mode(const.RESOLUTION, pl.RESIZABLE)
+        self._is_started = False
 
         # Chargement des ressources
-        self.fond = pygame.image.load("fond.jpg").convert()
-        self.perso = pygame.image.load("perso.png").convert_alpha()
+        self._fond = pygame.image.load("fond.jpg").convert()
+        self._perso = pygame.image.load("perso.png").convert_alpha()
 
-        self.perso_mngr = char_manager.CharManager(self.perso, self.fen)
+        self.perso_mngr = char_manager.CharManager(self._perso, self.fen)
         self.bind_mngr = bind_manager.BindManager(self.perso_mngr, self)
 
         self.update()
 
     def loop(self):
         # Lancement du jeu
-        self.is_started = True
-        while(self.is_started):
+        self._is_started = True
+        while(self._is_started):
             for event in pygame.event.get():
                 self.bind_mngr.handle(event)
             self.update()
         pygame.quit()
 
     def update(self):
-        self.fen.blit(self.fond, (0, 0, self.fen.get_width(), self.fen.get_height()))
+        # Background
+        editable_background = self._fond.copy()
+        editable_background = pygame.transform.scale(editable_background, (self.fen.get_width(), self.fen.get_height()))
+        self.fen.blit(editable_background, (0, 0))
+
+        # Character
         self.perso_mngr.blit()
+
+        # Display
         pygame.display.flip()
 
     def stop(self):
-        self.is_started = False
+        self._is_started = False

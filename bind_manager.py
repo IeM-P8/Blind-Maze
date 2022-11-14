@@ -1,6 +1,6 @@
 # Libs publiques
-import pygame
 import pygame.locals as pl
+import const
 
 # Libs locales
 from char_manager import CharManager
@@ -22,10 +22,10 @@ class BindManager():
             
             #Déplacements
             elif event.key == pl.K_z:
-                self.char_mngr.move(0,-10)
+                self.char_mngr.move(const.UP)
             elif event.key == pl.K_s:
-                self.char_mngr.move(0, 10)
+                self.char_mngr.move(const.DOWN)
             elif event.key == pl.K_q:
-                self.char_mngr.move(-10,0)
+                self.char_mngr.move(const.LEFT)
             elif event.key == pl.K_d:
-                self.char_mngr.move( 10,0)
+                self.char_mngr.move(const.RIGHT)
