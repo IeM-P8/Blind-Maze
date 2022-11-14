@@ -22,10 +22,14 @@ class BindManager():
             
             #Déplacements
             elif event.key == pl.K_z:
-                self.char_mngr.move(const.UP)
+                if(self.char_mngr.get_position()[1] > 0):
+                    self.char_mngr.move(const.UP)
             elif event.key == pl.K_s:
-                self.char_mngr.move(const.DOWN)
+                if(self.char_mngr.get_position()[1] < const.MAP_HEIGHT - 1):
+                    self.char_mngr.move(const.DOWN)
             elif event.key == pl.K_q:
-                self.char_mngr.move(const.LEFT)
+                if(self.char_mngr.get_position()[0] > 0):
+                    self.char_mngr.move(const.LEFT)
             elif event.key == pl.K_d:
-                self.char_mngr.move(const.RIGHT)
+                if(self.char_mngr.get_position()[0] < const.MAP_WIDTH - 1):
+                    self.char_mngr.move(const.RIGHT)
