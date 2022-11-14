@@ -154,20 +154,12 @@ while not done:
         current_cell = stack.pop()
         
     elif len(stack) == 0:
-        grid = []
+        break
 
-        for y in range(rows):
-            grid.append([])
-            for x in range(cols):
-                grid[y].append(Cell(x,y))
-        
-        current_cell = grid[0][0]
-        next_cell = 0
-    
-    pygame.display.flip()
-    t.sleep(0.2)
+current_cell.current = False
+current_cell.draw()
+pygame.display.flip()
 
-done = False
 while not done:
     # --- Main event loop ---
     for event in pygame.event.get():
