@@ -3,9 +3,9 @@ import pygame
 import pygame.locals as pl
 
 # Libs locales
-import const
-import char_manager
-import bind_manager
+import source.const as const
+import source.char_manager as char_manager
+import source.bind_manager as bind_manager
 
 class GameManager():
     def __init__(self):
@@ -17,8 +17,8 @@ class GameManager():
         self._is_started = False
 
         # Chargement des ressources
-        self._fond = pygame.image.load("fond.jpg").convert()
-        self._perso = pygame.image.load("perso.png").convert_alpha()
+        self._fond = pygame.image.load(const.PATH_BACKGROUND).convert()
+        self._perso = pygame.image.load(const.PATH_PERSO).convert_alpha()
 
         self.perso_mngr = char_manager.CharManager(self._perso, self.fen)
         self.bind_mngr = bind_manager.BindManager(self.perso_mngr, self)

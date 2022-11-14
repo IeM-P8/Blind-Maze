@@ -1,9 +1,9 @@
 # Libs publiques
 import pygame.locals as pl
-import const
+import source.const as const
 
 # Libs locales
-from char_manager import CharManager
+from source.char_manager import CharManager
 
 class BindManager():
     def __init__(self, char_mngr: CharManager, game_mngr):

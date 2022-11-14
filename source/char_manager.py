@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import Rect
 
 # Libs locales
-import const
+import source.const as const
 
 class CharManager():
     """ A class for managing a character on a pygame surface
