@@ -6,6 +6,8 @@ import pygame.locals as pl
 import source.const as const
 import source.char_manager as char_manager
 import source.bind_manager as bind_manager
+import source.laby_generator as laby_generator
+import source.case as case
 
 class GameManager():
     def __init__(self):
