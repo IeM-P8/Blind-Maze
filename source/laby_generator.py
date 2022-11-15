@@ -1,6 +1,5 @@
 import random
 import pygame
-import time as t
 pygame.init()
 
 WHITE = (255,255,255)
@@ -8,6 +7,7 @@ GREY = (20,20,20)
 BLACK = (0,0,0)
 PURPLE = (100,0,100)
 RED = (255,0,0)
+YELLOW = (255,255,0)
 
 size = (400,400)
 screen = pygame.display.set_mode([400, 400])
@@ -32,6 +32,7 @@ class Cell():
         
         self.visited = False
         self.current = False
+        self.key = False
         
         self.walls = [True,True,True,True] # top , right , bottom , left
         
@@ -119,51 +120,49 @@ for y in range(rows):
 
 current_cell = grid[0][0]
 next_cell = 0
-
+finished: int = 0
 # -------- Main Program Loop -----------
 while not done:
     # --- Main event loop ---
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-    
-    screen.fill(GREY)
-    
-    current_cell.visited = True
-    current_cell.current = True
-    
-    for y in range(rows):
-        for x in range(cols):
-            grid[y][x].draw()
-    
-    next_cell = current_cell.checkNeighbors()
-    
-    if next_cell != False:
-        current_cell.neighbors = []
+    while not finished == 2:
+        screen.fill(GREY)
         
-        stack.append(current_cell)
+        current_cell.visited = True
+        current_cell.current = True
         
-        removeWalls(current_cell,next_cell)
+        for y in range(rows):
+            for x in range(cols):
+                grid[y][x].draw()
         
-        current_cell.current = False
+        next_cell = current_cell.checkNeighbors()
         
-        current_cell = next_cell
-    
-    elif len(stack) > 0:
-        current_cell.current = False
-        current_cell = stack.pop()
+        if next_cell != False:
+            current_cell.neighbors = []
+            
+            stack.append(current_cell)
+            
+            removeWalls(current_cell,next_cell)
+            
+            current_cell.current = False
+            
+            current_cell = next_cell
         
-    elif len(stack) == 0:
-        break
+        elif len(stack) > 0:
+            current_cell.current = False
+            current_cell = stack.pop()
+            
+        elif len(stack) == 0:
+            current_cell.current = False
+            current_cell.draw()
+            grid[random.randint(1, rows)][random.randint(1, cols)].key = True
+            pygame.display.flip()
+            break
 
-current_cell.current = False
-current_cell.draw()
-pygame.display.flip()
-
-while not done:
-    # --- Main event loop ---
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            done = True
+        pygame.display.flip()
+        
+        clock.tick(60)
 
 pygame.quit()
