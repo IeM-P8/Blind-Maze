@@ -5,8 +5,8 @@ import pygame.locals as pl
 # Libs locales
 import source.const as const
 import source.char_manager as char_manager
-import source.bind_manager as bind_manager
-import source.laby_generator as laby_generator
+import source.bind_listener as bind_listener
+import source.maze_gen as maze_gen
 import source.case as case
 
 class GameManager():
@@ -23,7 +23,7 @@ class GameManager():
         self._perso = pygame.image.load(const.PATH_PERSO).convert_alpha()
 
         self.perso_mngr = char_manager.CharManager(self._perso, self.fen)
-        self.bind_mngr = bind_manager.BindManager(self.perso_mngr, self)
+        self.bind_mngr = bind_listener.BindManager(self.perso_mngr, self)
 
         self.update()
 
