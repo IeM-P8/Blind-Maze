@@ -24,13 +24,13 @@ class Case():
 
     
     def checkNeighbors(self):
-        if self.y >= 0:
+        if self.y > 0:
             self.top = self.grid[self.y - 1][self.x]
         if self.x + 1 < len(self.grid[0]):
             self.right = self.grid[self.y][self.x + 1]
         if self.y + 1 < len(self.grid):
             self.bottom = self.grid[self.y + 1][self.x]
-        if self.x - 1 >= 0:
+        if self.x > 0:
             self.left = self.grid[self.y][self.x - 1]
         
         if self.top != 0:

@@ -1,6 +1,5 @@
 # Libs publiques
 import pygame
-from pygame.locals import Rect
 
 # Libs locales
 import source.const as const

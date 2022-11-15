@@ -32,7 +32,7 @@ def maze_gen():
             current_cell.neighbors = []
             
             stack.append(current_cell)
-            removeWalls(current_cell,next_cell)
+            removeWalls(current_cell, next_cell)
             
             current_cell.current = False
             

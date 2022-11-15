@@ -49,25 +49,26 @@ class GameManager():
         pygame.quit()
 
     def update(self):
-        # Background
-        editable_background = self._fond.copy()
-        editable_background = pygame.transform.scale(editable_background, (self.fen.get_width(), self.fen.get_height()))
-        self.fen.blit(editable_background, (0, 0))
-
-        # Labyrinthe
-        self.draw_maze()
-
-        # Clé
         for actual_frame in range(5):
+
+        # Background
+            editable_background = self._fond.copy()
+            editable_background = pygame.transform.scale(editable_background, (self.fen.get_width(), self.fen.get_height()))
+            self.fen.blit(editable_background, (0, 0))
+
+            # Labyrinthe
+            self.draw_maze()
+
+            # Character
+            self.perso_mngr.blit()
+
+            # Clé
             self.fen.blit(self.key_animations[actual_frame], (self.fen.get_width() / 2 - 50, self.fen.get_height() / 2 - 50))
             self.clock.tick(30)
             pygame.display.flip()
 
-        # Character
-        self.perso_mngr.blit()
-
         # Display
-        pygame.display.flip()
+        # pygame.display.flip()
 
     def draw_maze(self):
         cell: case.Case
