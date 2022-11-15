@@ -12,7 +12,7 @@ class CharManager():
     def __init__(self, perso: pygame.surface.Surface, fen: pygame.surface.Surface):
         self._perso = perso
         self._fen = fen
-        self._position_perso_unit = (0,0)
+        self._position_perso_unit = const.PLAYER_SPAWN
 
     def set_perso(self, perso: pygame.surface.Surface):
         self._perso = perso
