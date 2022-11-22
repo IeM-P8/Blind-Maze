@@ -46,9 +46,30 @@ class GameManager():
             # Gestion des évènements
             for event in pygame.event.get():
                 self.bind_mngr.handle(event)
+            
+            # Check positions spéciale
+            self.check_special_positions()
+
+            # Mise à jour affichage
             self.update()
             self.clock.tick(60)
+
+        # Fin du jeu
         pygame.quit()
+
+    def check_special_positions(self):
+        # Ramassage de clé
+        if self.perso_mngr.get_position() == (self.key_cell.x, self.key_cell.y):
+            self.key_cell.key = False
+            self.perso_mngr.give_key()
+            # TODO: Bruit de ramassage de clé
+
+        # Ouverture de porte
+        # TODO: Vraie gestion de porte
+        # TODO: Vraie gestion de victoire
+        if self.perso_mngr.get_position() == (0, 0) and self.perso_mngr.has_key():
+            print("Gagné !")
+            self.stop()
 
     def update(self):
         # TODO: Affichage contour de la fenêtre
@@ -57,7 +78,6 @@ class GameManager():
         # editable_background = self._fond.copy()
         # editable_background = pygame.transform.scale(editable_background, (self.fen.get_width(), self.fen.get_height()))
         # self.fen.blit(editable_background, (0, 0))
-
         self.fen.fill((0, 0, 0))
 
         # Labyrinthe
@@ -68,19 +88,8 @@ class GameManager():
 
         # Clé
         # TODO: Aura de la clé
-        # Tous ces calculs servent à centrer la clé sur la case
-        sprite = self.key_animations.tick()
-
-        h_px_per_unit = self.fen.get_width() / const.MAP_WIDTH
-        v_px_per_unit = self.fen.get_height() / const.MAP_HEIGHT
-
-        key_x_in_cell = h_px_per_unit / 2 - sprite.get_width() / 2
-        key_y_in_cell = v_px_per_unit / 2 - sprite.get_height() / 2
-
-        x_cle = self.key_cell.x * h_px_per_unit + key_x_in_cell
-        y_cle = self.key_cell.y * v_px_per_unit + key_y_in_cell
-
-        self.fen.blit(sprite, (x_cle, y_cle))
+        if self.key_cell.key:
+            self.draw_key()
 
         # Display
         pygame.display.flip()
@@ -101,6 +110,21 @@ class GameManager():
                     pygame.draw.line(self.fen, const.COLOR_WALL, ((cell.x + 1) * cell_width, (cell.y + 1) * cell_height-1), (cell.x * cell_width, (cell.y + 1) * cell_height-1))
                 if cell.walls[3]:
                     pygame.draw.line(self.fen, const.COLOR_WALL, (cell.x * cell_width, (cell.y + 1) * cell_height), (cell.x * cell_width, cell.y * cell_height))
+
+    def draw_key(self):
+        # Tous ces calculs servent à centrer la clé sur la case
+        sprite = self.key_animations.tick()
+
+        h_px_per_unit = self.fen.get_width() / const.MAP_WIDTH
+        v_px_per_unit = self.fen.get_height() / const.MAP_HEIGHT
+
+        key_x_in_cell = h_px_per_unit / 2 - sprite.get_width() / 2
+        key_y_in_cell = v_px_per_unit / 2 - sprite.get_height() / 2
+
+        x_cle = self.key_cell.x * h_px_per_unit + key_x_in_cell
+        y_cle = self.key_cell.y * v_px_per_unit + key_y_in_cell
+
+        self.fen.blit(sprite, (x_cle, y_cle))
 
     def get_maze(self):
         return [line[:] for line in self.maze]

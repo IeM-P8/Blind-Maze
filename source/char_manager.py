@@ -9,27 +9,25 @@ class CharManager():
     """
 
     def __init__(self, perso: pygame.surface.Surface, fen: pygame.surface.Surface):
+        # Stockage des arguments
         self._perso = perso
         self._fen = fen
         self._position_perso_unit = const.PLAYER_SPAWN
 
+        # Valeurs par défaut
+        self.key = False
+
     def set_perso(self, perso: pygame.surface.Surface):
         self._perso = perso
 
-        return self
-
     def move(self, amount: tuple[int, int]):
         self._position_perso_unit = tuple((self._position_perso_unit[0] + amount[0], self._position_perso_unit[1] + amount[1]))
-
-        return self
 
     def get_position(self):
         return self._position_perso_unit
     
     def set_postion(self, coords: tuple[int, int]):
         self._position_perso_unit = coords
-
-        return self
 
     def blit(self):
         h_px_per_unit = self._fen.get_width() / const.MAP_WIDTH
@@ -42,4 +40,8 @@ class CharManager():
 
         self._fen.blit(editable_perso, pos_in_pixels)
 
-        return self
+    def give_key(self):
+        self.key = True
+
+    def has_key(self):
+        return self.key
