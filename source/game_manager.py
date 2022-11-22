@@ -100,35 +100,35 @@ class GameManager():
 
         for line in self.maze:
             for cell in line:
+                cell_origin = (
+                    (cell.x + 1) * cell_width,
+                    (cell.y + 1) * cell_height
+                )
+
                 if cell.walls[0]:
                     pygame.draw.line(
                         self.fen, const.COLOR_WALL,
-                        ((cell.x + 1) * cell_width,
-                         (cell.y + 1) * cell_height),
-                        ((cell.x + 2) * cell_width,
-                         (cell.y + 1) * cell_height)
+                        cell_origin,
+                        (cell_origin[0] + cell_width, cell_origin[1])
                     )
                 if cell.walls[1]:
                     pygame.draw.line(
                         self.fen, const.COLOR_WALL,
-                        ((cell.x + 2) * cell_width,
-                         (cell.y + 1) * cell_height),
-                        ((cell.x + 2) * cell_width,
-                         (cell.y + 2) * cell_height))
+                        (cell_origin[0] + cell_width, cell_origin[1]),
+                        (cell_origin[0] + cell_width, cell_origin[1] + cell_height)
+                    )
                 if cell.walls[2]:
                     pygame.draw.line(
                         self.fen, const.COLOR_WALL,
-                        ((cell.x + 1) * cell_width,
-                         (cell.y + 2) * cell_height-1),
-                        ((cell.x + 2) * cell_width,
-                         (cell.y + 2) * cell_height-1))
+                        (cell_origin[0] + cell_width, cell_origin[1] + cell_height),
+                        (cell_origin[0], cell_origin[1] + cell_height)
+                    )
                 if cell.walls[3]:
                     pygame.draw.line(
                         self.fen, const.COLOR_WALL,
-                        ((cell.x + 1) * cell_width,
-                         (cell.y + 1) * cell_height),
-                        ((cell.x + 1) * cell_width,
-                         (cell.y + 2) * cell_height))
+                        (cell_origin[0], cell_origin[1] + cell_height),
+                        cell_origin
+                    )
 
     def draw_key(self):
         # Tous ces calculs servent à centrer la clé sur la case
