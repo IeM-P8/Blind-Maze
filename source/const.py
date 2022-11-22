@@ -1,6 +1,6 @@
 # Graphique
 RESOLUTION = (1280, 720) # Inutile
-PERSO_H_SCALE = 0.5
+PERSO_H_SCALE = 0.6
 PERSO_V_SCALE = 0.8
 COLOR_WALL = (255, 0, 0)
 
