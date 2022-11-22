@@ -48,7 +48,6 @@ def maze_gen():
     key_cell.key = True
 
     # Terrain de jeu terminé
-    # TODO: Renvoyer la cellule clé
     return grid, key_cell
 
 
