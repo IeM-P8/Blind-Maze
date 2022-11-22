@@ -25,6 +25,8 @@ class BindManager():
                 self.game_mngr.stop()
             
             #Déplacements
+            # TODO: Bruits de pas
+            # TODO: Bruits de collision
             elif event.key == pl.K_z:
                 if pos[1] > 0 and not cell.walls[0]:
                     self.char_mngr.move(const.UP)
