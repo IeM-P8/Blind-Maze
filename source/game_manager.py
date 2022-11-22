@@ -72,8 +72,6 @@ class GameManager():
             self.stop()
 
     def update(self):
-        # TODO: Affichage contour de la fenêtre
-        
         # # Background
         # editable_background = self._fond.copy()
         # editable_background = pygame.transform.scale(editable_background, (self.fen.get_width(), self.fen.get_height()))
@@ -97,32 +95,53 @@ class GameManager():
     def draw_maze(self):
         cell: case.Case
 
-        cell_width = self.fen.get_width() / const.MAP_WIDTH
-        cell_height = self.fen.get_height() / const.MAP_HEIGHT
+        cell_width = self.fen.get_width() / (const.MAP_WIDTH + 2) # +2 pour le décors
+        cell_height = self.fen.get_height() / (const.MAP_HEIGHT + 2)
 
         for line in self.maze:
             for cell in line:
                 if cell.walls[0]:
-                    pygame.draw.line(self.fen, const.COLOR_WALL, (cell.x * cell_width, cell.y * cell_height), ((cell.x + 1) * cell_width, cell.y * cell_height))
+                    pygame.draw.line(
+                        self.fen, const.COLOR_WALL,
+                        ((cell.x + 1) * cell_width,
+                         (cell.y + 1) * cell_height),
+                        ((cell.x + 2) * cell_width,
+                         (cell.y + 1) * cell_height)
+                    )
                 if cell.walls[1]:
-                    pygame.draw.line(self.fen, const.COLOR_WALL, ((cell.x + 1) * cell_width-1, cell.y * cell_height), ((cell.x + 1) * cell_width-1, (cell.y + 1) * cell_height))
+                    pygame.draw.line(
+                        self.fen, const.COLOR_WALL,
+                        ((cell.x + 2) * cell_width,
+                         (cell.y + 1) * cell_height),
+                        ((cell.x + 2) * cell_width,
+                         (cell.y + 2) * cell_height))
                 if cell.walls[2]:
-                    pygame.draw.line(self.fen, const.COLOR_WALL, ((cell.x + 1) * cell_width, (cell.y + 1) * cell_height-1), (cell.x * cell_width, (cell.y + 1) * cell_height-1))
+                    pygame.draw.line(
+                        self.fen, const.COLOR_WALL,
+                        ((cell.x + 1) * cell_width,
+                         (cell.y + 2) * cell_height-1),
+                        ((cell.x + 2) * cell_width,
+                         (cell.y + 2) * cell_height-1))
                 if cell.walls[3]:
-                    pygame.draw.line(self.fen, const.COLOR_WALL, (cell.x * cell_width, (cell.y + 1) * cell_height), (cell.x * cell_width, cell.y * cell_height))
+                    pygame.draw.line(
+                        self.fen, const.COLOR_WALL,
+                        ((cell.x + 1) * cell_width,
+                         (cell.y + 1) * cell_height),
+                        ((cell.x + 1) * cell_width,
+                         (cell.y + 2) * cell_height))
 
     def draw_key(self):
         # Tous ces calculs servent à centrer la clé sur la case
         sprite = self.key_animations.tick()
 
-        h_px_per_unit = self.fen.get_width() / const.MAP_WIDTH
-        v_px_per_unit = self.fen.get_height() / const.MAP_HEIGHT
+        h_px_per_unit = self.fen.get_width() / (const.MAP_WIDTH + 2)
+        v_px_per_unit = self.fen.get_height() / (const.MAP_HEIGHT + 2)
 
         key_x_in_cell = h_px_per_unit / 2 - sprite.get_width() / 2
         key_y_in_cell = v_px_per_unit / 2 - sprite.get_height() / 2
 
-        x_cle = self.key_cell.x * h_px_per_unit + key_x_in_cell
-        y_cle = self.key_cell.y * v_px_per_unit + key_y_in_cell
+        x_cle = (self.key_cell.x + 1) * h_px_per_unit + key_x_in_cell
+        y_cle = (self.key_cell.y + 1) * v_px_per_unit + key_y_in_cell
 
         self.fen.blit(sprite, (x_cle, y_cle))
 

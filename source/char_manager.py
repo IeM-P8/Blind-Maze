@@ -30,13 +30,16 @@ class CharManager():
         self._position_perso_unit = coords
 
     def blit(self):
-        h_px_per_unit = self._fen.get_width() / const.MAP_WIDTH
-        v_px_per_unit = self._fen.get_height() / const.MAP_HEIGHT
+        h_px_per_unit = self._fen.get_width() / (const.MAP_WIDTH + 2)
+        v_px_per_unit = self._fen.get_height() / (const.MAP_HEIGHT + 2)
 
         editable_perso = self._perso.copy()
         editable_perso = pygame.transform.scale(editable_perso, (int(h_px_per_unit*const.PERSO_H_SCALE), int(v_px_per_unit*const.PERSO_V_SCALE)))
 
-        pos_in_pixels = ((self._position_perso_unit[0] + (1-const.PERSO_H_SCALE)/2) * h_px_per_unit, (self._position_perso_unit[1] + (1-const.PERSO_V_SCALE)/2) * v_px_per_unit)
+        pos_in_pixels = (
+            (self._position_perso_unit[0]+1 + (1-const.PERSO_H_SCALE)/2) * h_px_per_unit,
+            (self._position_perso_unit[1]+1 + (1-const.PERSO_V_SCALE)/2) * v_px_per_unit
+        )
 
         self._fen.blit(editable_perso, pos_in_pixels)
 
