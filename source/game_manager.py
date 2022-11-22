@@ -102,5 +102,8 @@ class GameManager():
                 if cell.walls[3]:
                     pygame.draw.line(self.fen, const.COLOR_WALL, (cell.x * cell_width, (cell.y + 1) * cell_height), (cell.x * cell_width, cell.y * cell_height))
 
+    def get_maze(self):
+        return [line[:] for line in self.maze]
+
     def stop(self):
         self._is_started = False
