@@ -23,7 +23,7 @@ class Case():
         self.next_cell = 0
 
     
-    def checkNeighbors(self) -> 'Case' | None:
+    def checkNeighbors(self):
         if self.y > 0:
             self.top = self.grid[self.y - 1][self.x]
         if self.x + 1 < len(self.grid[0]):
