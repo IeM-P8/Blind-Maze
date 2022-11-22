@@ -51,7 +51,7 @@ class GameManager():
     def update(self):
         for actual_frame in range(5):
 
-        # Background
+            # Background
             editable_background = self._fond.copy()
             editable_background = pygame.transform.scale(editable_background, (self.fen.get_width(), self.fen.get_height()))
             self.fen.blit(editable_background, (0, 0))
@@ -86,6 +86,6 @@ class GameManager():
                     pygame.draw.line(self.fen, const.COLOR_WALL, ((cell.x + 1) * cell_width, (cell.y + 1) * cell_height-1), (cell.x * cell_width, (cell.y + 1) * cell_height-1))
                 if cell.walls[3]:
                     pygame.draw.line(self.fen, const.COLOR_WALL, (cell.x * cell_width, (cell.y + 1) * cell_height), (cell.x * cell_width, cell.y * cell_height))
-                
+
     def stop(self):
         self._is_started = False
