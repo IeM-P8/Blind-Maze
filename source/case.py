@@ -15,10 +15,10 @@ class Case():
         # neighbors
         self.neighbors = []
         
-        self.top = 0
-        self.right = 0
-        self.bottom = 0
-        self.left = 0
+        self.top: Case | None = None
+        self.right: Case | None = None
+        self.bottom: Case | None = None
+        self.left: Case | None = None
         
         self.next_cell = 0
 
@@ -33,16 +33,16 @@ class Case():
         if self.x > 0:
             self.left = self.grid[self.y][self.x - 1]
         
-        if self.top != 0:
+        if self.top:
             if not self.top.visited:
                 self.neighbors.append(self.top)
-        if self.right != 0:
+        if self.right:
             if not self.right.visited:
                 self.neighbors.append(self.right)
-        if self.bottom != 0:
+        if self.bottom:
             if not self.bottom.visited:
                 self.neighbors.append(self.bottom)
-        if self.left != 0:
+        if self.left:
             if not self.left.visited:
                 self.neighbors.append(self.left)
         
