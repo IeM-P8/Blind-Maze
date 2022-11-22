@@ -8,6 +8,7 @@ import source.char_manager as char_manager
 import source.bind_listener as bind_listener
 import source.maze_gen as maze_gen
 import source.case as case
+import source.animation_manager as animate
 
 class GameManager():
     def __init__(self):
@@ -31,12 +32,12 @@ class GameManager():
         self.maze = maze_gen.maze_gen()
 
         # Gestion animations
-        self.key_animations = []
+        key_animations = []
 
         for i in range(1, 6):
-            self.key_animations.append(pygame.image.load(f"{const.PATH_CLE}{i}.png"))
+            key_animations.append(pygame.image.load(f"{const.PATH_CLE}{i}.png"))
 
-        self.update()
+        self.key_animations = animate.AnimationManager(key_animations, 5)
 
     def loop(self):
         # Lancement du jeu
@@ -46,28 +47,25 @@ class GameManager():
             for event in pygame.event.get():
                 self.bind_mngr.handle(event)
             self.update()
+            self.clock.tick(30)
         pygame.quit()
 
     def update(self):
-        # TODO: Gérer les animations correctement
-        for actual_frame in range(5):
+        # Background
+        editable_background = self._fond.copy()
+        editable_background = pygame.transform.scale(editable_background, (self.fen.get_width(), self.fen.get_height()))
+        self.fen.blit(editable_background, (0, 0))
 
-            # Background
-            editable_background = self._fond.copy()
-            editable_background = pygame.transform.scale(editable_background, (self.fen.get_width(), self.fen.get_height()))
-            self.fen.blit(editable_background, (0, 0))
+        # Labyrinthe
+        self.draw_maze()
 
-            # Labyrinthe
-            self.draw_maze()
+        # Character
+        self.perso_mngr.blit()
 
-            # Character
-            self.perso_mngr.blit()
-
-            # Clé
-            # TODO: Placer la clé à sa place
-            self.fen.blit(self.key_animations[actual_frame], (self.fen.get_width() / 2 - 50, self.fen.get_height() / 2 - 50))
-            self.clock.tick(30)
-            pygame.display.flip()
+        # Clé
+        # TODO: Placer la clé à sa place
+        self.fen.blit(self.key_animations.tick(), (self.fen.get_width() / 2 - 50, self.fen.get_height() / 2 - 50))
+        pygame.display.flip()
 
         # Display
         # pygame.display.flip()
