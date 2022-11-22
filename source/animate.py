@@ -1,0 +1,1 @@
+# TODO: Classe pour les animations de sprites (clé)

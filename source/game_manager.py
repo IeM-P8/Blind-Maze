@@ -49,6 +49,7 @@ class GameManager():
         pygame.quit()
 
     def update(self):
+        # TODO: Gérer les animations correctement
         for actual_frame in range(5):
 
             # Background
@@ -63,6 +64,7 @@ class GameManager():
             self.perso_mngr.blit()
 
             # Clé
+            # TODO: Placer la clé à sa place
             self.fen.blit(self.key_animations[actual_frame], (self.fen.get_width() / 2 - 50, self.fen.get_height() / 2 - 50))
             self.clock.tick(30)
             pygame.display.flip()

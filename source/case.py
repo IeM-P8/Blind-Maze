@@ -23,7 +23,7 @@ class Case():
         self.next_cell = 0
 
     
-    def checkNeighbors(self):
+    def checkNeighbors(self) -> 'Case' | None:
         if self.y > 0:
             self.top = self.grid[self.y - 1][self.x]
         if self.x + 1 < len(self.grid[0]):
@@ -50,4 +50,4 @@ class Case():
             self.next_cell = self.neighbors[random.randrange(0,len(self.neighbors))]
             return self.next_cell
         else:
-            return False
+            return None

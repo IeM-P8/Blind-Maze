@@ -18,8 +18,8 @@ def maze_gen():
         for x in range(cols):
             grid[y].append(case.Case(x,y,grid))
 
-    current_cell = grid[0][0]
-    next_cell = 0
+    current_cell: case.Case = grid[0][0]
+    next_cell: case.Case | None = None
 
     # Boucle de l'algo
     while True:
@@ -28,7 +28,7 @@ def maze_gen():
         
         next_cell = current_cell.checkNeighbors()
         
-        if next_cell != False:
+        if next_cell:
             current_cell.neighbors = []
             
             stack.append(current_cell)
@@ -50,6 +50,7 @@ def maze_gen():
     key_cell.key = True
 
     # Terrain de jeu terminé
+    # TODO: Renvoyer la cellule clé
     return grid
 
 
