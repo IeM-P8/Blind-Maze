@@ -5,8 +5,6 @@ import source.case as case
 def maze_gen():
     size = (const.MAP_WIDTH, const.MAP_HEIGHT)
 
-    done = False
-
     cols = size[0]
     rows = size[1]
 
@@ -46,12 +44,12 @@ def maze_gen():
             break
     
     # Ajout d'une clé
-    key_cell = grid[random.randint(1, rows - 2)][random.randint(1, cols - 2)]
+    key_cell: case.Case = grid[random.randint(1, rows - 2)][random.randint(1, cols - 2)]
     key_cell.key = True
 
     # Terrain de jeu terminé
     # TODO: Renvoyer la cellule clé
-    return grid
+    return grid, key_cell
 
 
 def removeWalls(current_cell,next_cell):

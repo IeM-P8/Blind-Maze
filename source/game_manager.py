@@ -29,7 +29,7 @@ class GameManager():
         self.bind_mngr = bind_listener.BindManager(self.perso_mngr, self)
 
         # Création du labyrinthe
-        self.maze = maze_gen.maze_gen()
+        self.maze, self.key_cell = maze_gen.maze_gen()
 
         # Gestion animations
         key_animations = []
@@ -37,7 +37,7 @@ class GameManager():
         for i in range(1, 6):
             key_animations.append(pygame.image.load(f"{const.PATH_CLE}{i}.png"))
 
-        self.key_animations = animate.AnimationManager(key_animations, 5)
+        self.key_animations = animate.AnimationManager(key_animations, 8)
 
     def loop(self):
         # Lancement du jeu
@@ -47,14 +47,18 @@ class GameManager():
             for event in pygame.event.get():
                 self.bind_mngr.handle(event)
             self.update()
-            self.clock.tick(30)
+            self.clock.tick(60)
         pygame.quit()
 
     def update(self):
-        # Background
-        editable_background = self._fond.copy()
-        editable_background = pygame.transform.scale(editable_background, (self.fen.get_width(), self.fen.get_height()))
-        self.fen.blit(editable_background, (0, 0))
+        # TODO: Affichage contour de la fenêtre
+        
+        # # Background
+        # editable_background = self._fond.copy()
+        # editable_background = pygame.transform.scale(editable_background, (self.fen.get_width(), self.fen.get_height()))
+        # self.fen.blit(editable_background, (0, 0))
+
+        self.fen.fill((0, 0, 0))
 
         # Labyrinthe
         self.draw_maze()
@@ -63,12 +67,23 @@ class GameManager():
         self.perso_mngr.blit()
 
         # Clé
-        # TODO: Placer la clé à sa place
-        self.fen.blit(self.key_animations.tick(), (self.fen.get_width() / 2 - 50, self.fen.get_height() / 2 - 50))
-        pygame.display.flip()
+        # TODO: Aura de la clé
+        # Tous ces calculs servent à centrer la clé sur la case
+        sprite = self.key_animations.tick()
+
+        h_px_per_unit = self.fen.get_width() / const.MAP_WIDTH
+        v_px_per_unit = self.fen.get_height() / const.MAP_HEIGHT
+
+        key_x_in_cell = h_px_per_unit / 2 - sprite.get_width() / 2
+        key_y_in_cell = v_px_per_unit / 2 - sprite.get_height() / 2
+
+        x_cle = self.key_cell.x * h_px_per_unit + key_x_in_cell
+        y_cle = self.key_cell.y * v_px_per_unit + key_y_in_cell
+
+        self.fen.blit(sprite, (x_cle, y_cle))
 
         # Display
-        # pygame.display.flip()
+        pygame.display.flip()
 
     def draw_maze(self):
         cell: case.Case
