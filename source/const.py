@@ -19,4 +19,7 @@ RIGHT=(1,0)
 PATH_PERSO = "ressources/images/perso.png"
 PATH_BACKGROUND = "ressources/images/fond.jpg"
 PATH_CLE = "ressources/images/Key_anim"
+
+# Chemin audio
 PATH_SOUNDS = "ressources/sons/"
+NAME_OPEN_SOUND = "DoorOpening.wav"

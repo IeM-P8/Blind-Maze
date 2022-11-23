@@ -1,6 +1,7 @@
 # Libs publiques
 import pygame
 import pygame.locals as pl
+import time as t
 
 # Libs locales
 import source.const as const
@@ -9,6 +10,7 @@ import source.bind_listener as bind_listener
 import source.maze_gen as maze_gen
 import source.case as case
 import source.animation_manager as animate
+import source.sound_mixer as sound_mixer
 
 class GameManager():
     def __init__(self):
@@ -25,8 +27,12 @@ class GameManager():
         self._fond = pygame.image.load(const.PATH_BACKGROUND).convert()
         self._perso = pygame.image.load(const.PATH_PERSO).convert_alpha()
 
+        # Managers de ressources
         self.perso_mngr = char_manager.CharManager(self._perso, self.fen)
         self.bind_mngr = bind_listener.BindManager(self.perso_mngr, self)
+        self.sound_mixer = sound_mixer.SoundMixer()
+
+        self.sound_mixer.load(const.NAME_OPEN_SOUND)
 
         # Création du labyrinthe
         self.maze, self.key_cell = maze_gen.maze_gen()
@@ -42,6 +48,7 @@ class GameManager():
     def loop(self):
         # Lancement du jeu
         self._is_started = True
+        # TODO: Animation début
         # TODO: Musique de fond
         while self._is_started:
             # Gestion des évènements
@@ -56,6 +63,8 @@ class GameManager():
             self.clock.tick(60)
 
         # Fin du jeu
+        # TODO: Animation fin
+        self.sound_mixer.chain([const.NAME_OPEN_SOUND])
         pygame.quit()
 
     def check_special_positions(self):
@@ -112,18 +121,21 @@ class GameManager():
                         cell_origin,
                         (cell_origin[0] + cell_width, cell_origin[1])
                     )
+
                 if cell.walls[1]:
                     pygame.draw.line(
                         self.fen, const.COLOR_WALL,
                         (cell_origin[0] + cell_width, cell_origin[1]),
                         (cell_origin[0] + cell_width, cell_origin[1] + cell_height)
                     )
+
                 if cell.walls[2]:
                     pygame.draw.line(
                         self.fen, const.COLOR_WALL,
                         (cell_origin[0] + cell_width, cell_origin[1] + cell_height),
                         (cell_origin[0], cell_origin[1] + cell_height)
                     )
+
                 if cell.walls[3]:
                     pygame.draw.line(
                         self.fen, const.COLOR_WALL,
@@ -133,7 +145,7 @@ class GameManager():
 
     def draw_key(self):
         # Tous ces calculs servent à centrer la clé sur la case
-        sprite = self.key_animations.tick()
+        sprite: pygame.surface.Surface = self.key_animations.tick()
 
         h_px_per_unit = self.fen.get_width() / (const.MAP_WIDTH + 2)
         v_px_per_unit = self.fen.get_height() / (const.MAP_HEIGHT + 2)
