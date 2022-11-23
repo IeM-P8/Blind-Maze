@@ -17,9 +17,6 @@ class CharManager():
         # Valeurs par défaut
         self.key = False
 
-    def set_perso(self, perso: pygame.surface.Surface):
-        self._perso = perso
-
     def move(self, amount: tuple[int, int]):
         self._position_perso_unit = tuple((self._position_perso_unit[0] + amount[0], self._position_perso_unit[1] + amount[1]))
 

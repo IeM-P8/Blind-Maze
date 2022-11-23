@@ -42,6 +42,7 @@ class GameManager():
     def loop(self):
         # Lancement du jeu
         self._is_started = True
+        # TODO: Musique de fond
         while self._is_started:
             # Gestion des évènements
             for event in pygame.event.get():
