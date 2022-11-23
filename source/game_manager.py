@@ -32,7 +32,7 @@ class GameManager():
         self.bind_mngr = bind_listener.BindManager(self.perso_mngr, self)
         self.sound_mixer = sound_mixer.SoundMixer()
 
-        self.sound_mixer.load(const.NAME_OPEN_SOUND)
+        self.sound_mixer.load(const.BASE_OPEN_SOUND+"DoorOpening.wav")
 
         # Création du labyrinthe
         self.maze, self.key_cell = maze_gen.maze_gen()
@@ -64,7 +64,7 @@ class GameManager():
 
         # Fin du jeu
         # TODO: Animation fin
-        self.sound_mixer.chain([const.NAME_OPEN_SOUND])
+        self.sound_mixer.chain([const.BASE_OPEN_SOUND+"DoorOpening.wav"])
         pygame.quit()
 
     def check_special_positions(self):
@@ -72,7 +72,7 @@ class GameManager():
         if self.perso_mngr.get_position() == (self.key_cell.x, self.key_cell.y):
             self.key_cell.key = False
             self.perso_mngr.give_key()
-            # TODO: Bruit de ramassage de clé
+            self.sound_mixer.play(const.NAME_KEY_SOUND)
 
         # Ouverture de porte
         # TODO: Vraie gestion de porte

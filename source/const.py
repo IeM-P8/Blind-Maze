@@ -22,4 +22,8 @@ PATH_CLE = "ressources/images/Key_anim"
 
 # Chemin audio
 PATH_SOUNDS = "ressources/sons/"
-NAME_OPEN_SOUND = "DoorOpening.wav"
+BASE_OPEN_SOUND = "DoorOpening/"
+BASE_CLOSED_SOUND = "DoorClosed/"
+NAME_KEY_SOUND = "SwordStrike/SwordStrike.wav"
+BASE_SWORD_SOUND = "SwordStrike/"
+BASE_WALL_SOUND = "WallHiting/"
