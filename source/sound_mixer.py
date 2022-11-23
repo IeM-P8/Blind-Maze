@@ -5,7 +5,7 @@ from source.const import PATH_SOUNDS
 
 class SoundMixer:
     def __init__(self):
-        self.d_sounds = {}
+        self.d_sounds: dict[str, pygame.mixer.Sound] = {}
 
     def play(self, name: str):
         if not name in self.d_sounds:
