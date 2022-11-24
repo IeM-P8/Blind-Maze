@@ -13,6 +13,7 @@ import source.animation_manager as animate
 import source.sound_mixer as sound_mixer
 
 class GameManager():
+    # TODO: Détection idle
     def __init__(self):
         #Initialisation
         pygame.init()

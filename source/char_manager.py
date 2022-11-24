@@ -4,6 +4,7 @@ import pygame
 # Libs locales
 import source.const as const
 from source.animation_manager import AnimationManager
+from source.sound_mixer import SoundMixer
 
 class CharManager():
     """ A class for managing a character on a pygame surface
@@ -47,12 +48,17 @@ class CharManager():
 
         self._current_animation: AnimationManager = self._animations["idle"]
 
+        # Bruit de pas
+        self._sound_mixer = SoundMixer()
+        # self._sound_mixer.load("footsteps.wav")
+
     def move(self, direction: tuple[int, int]):
         self._position_perso_unit = tuple((self._position_perso_unit[0] + direction[0], self._position_perso_unit[1] + direction[1]))
+        # self._sound_mixer.play("footsteps.wav")
 
         if direction == const.DOWN:
             self.set_animation("down")
-        
+
 
     def set_animation(self, animation: str):
         if animation in self._animations:
