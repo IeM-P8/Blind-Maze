@@ -22,10 +22,10 @@ class GameManager():
         pygame.key.set_repeat(500, 500)
         self._is_started = False
 
-        self.clock = pygame.time.Clock()
+        self._clock = pygame.time.Clock()
 
         # Chargement des ressources
-        self._fond = pygame.image.load(const.PATH_BACKGROUND).convert()
+        self._border = pygame.image.load(const.PATH_CADRE).convert()
 
         # Managers de ressources
         self.perso_mngr = char_manager.CharManager(self.fen)
@@ -51,42 +51,49 @@ class GameManager():
         # TODO: Animation début
         # TODO: Musique de fond
         while self._is_started:
+            self._clock.tick(60)
+            
             # Gestion des évènements
             for event in pygame.event.get():
                 self.bind_mngr.handle(event)
+
+            # Mise à jour affichage
+            self.update()
             
             # Check positions spéciale
             self.check_special_positions()
 
-            # Mise à jour affichage
-            self.update()
-            self.clock.tick(60)
-
         # Fin du jeu
-        # TODO: Animation fin
-        self.sound_mixer.chain([const.BASE_OPEN_SOUND+"DoorOpening.wav"])
         pygame.quit()
 
     def check_special_positions(self):
         # Ramassage de clé
-        if self.perso_mngr.get_position() == (self.key_cell.x, self.key_cell.y):
+        if self.perso_mngr.get_position() == (self.key_cell.x, self.key_cell.y) and self.key_cell.key:
             self.key_cell.key = False
             self.perso_mngr.give_key()
             self.sound_mixer.play(const.NAME_KEY_SOUND)
 
         # Ouverture de porte
         # TODO: Vraie gestion de porte
-        # TODO: Vraie gestion de victoire
+        # TODO: Célébration
         if self.perso_mngr.get_position() == (0, 0) and self.perso_mngr.has_key():
             print("Gagné !")
+            self.sound_mixer.chain([const.BASE_OPEN_SOUND+"DoorOpening.wav"])
             self.stop()
 
     def update(self):
-        # # Background
-        # editable_background = self._fond.copy()
-        # editable_background = pygame.transform.scale(editable_background, (self.fen.get_width(), self.fen.get_height()))
-        # self.fen.blit(editable_background, (0, 0))
         self.fen.fill((0, 0, 0))
+
+        # Dessin du cadre
+        h_px_per_unit = self.fen.get_width() / (const.MAP_WIDTH + 2)
+        v_px_per_unit = self.fen.get_height() / (const.MAP_HEIGHT + 2)
+
+        resized = pygame.transform.scale(self._border, (h_px_per_unit,v_px_per_unit ))
+        rotated = pygame.transform.rotate(resized, 180)
+
+        for i in range(const.MAP_WIDTH):
+            self.fen.blit(resized, (h_px_per_unit * (i + 1), 0))
+            self.fen.blit(rotated, (h_px_per_unit * (i + 1), v_px_per_unit * (const.MAP_HEIGHT + 1)))
 
         # Labyrinthe
         self.draw_maze()

@@ -19,6 +19,7 @@ RIGHT=(1,0)
 PATH_PERSO = "ressources/images/perso/"
 PATH_BACKGROUND = "ressources/images/fond.jpg"
 PATH_CLE = "ressources/images/cle/"
+PATH_CADRE = "ressources/images/border.png"
 
 # Chemin audio
 PATH_SOUNDS = "ressources/sons/"
