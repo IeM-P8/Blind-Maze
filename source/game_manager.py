@@ -25,10 +25,9 @@ class GameManager():
 
         # Chargement des ressources
         self._fond = pygame.image.load(const.PATH_BACKGROUND).convert()
-        self._perso = pygame.image.load(const.PATH_PERSO).convert_alpha()
 
         # Managers de ressources
-        self.perso_mngr = char_manager.CharManager(self._perso, self.fen)
+        self.perso_mngr = char_manager.CharManager(self.fen)
         self.bind_mngr = bind_listener.BindManager(self.perso_mngr, self)
         self.sound_mixer = sound_mixer.SoundMixer()
 

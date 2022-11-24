@@ -3,22 +3,40 @@ import pygame
 
 # Libs locales
 import source.const as const
+from source.animation_manager import AnimationManager
 
 class CharManager():
     """ A class for managing a character on a pygame surface
     """
 
-    def __init__(self, perso: pygame.surface.Surface, fen: pygame.surface.Surface):
+    def __init__(self, fen: pygame.surface.Surface):
         # Stockage des arguments
-        self._perso = perso
         self._fen = fen
         self._position_perso_unit = const.PLAYER_SPAWN
 
         # Valeurs par défaut
         self.key = False
 
+        # Animations
+        self._frames = {
+            "up": [const.PATH_PERSO+f"up/{i}.png" for i in range(1, 5)],
+            #"down": [const.PATH_PERSO+f"down/{i}.png" for i in range(1, 5)],
+            #"left": [const.PATH_PERSO+f"left/{i}.png" for i in range(1, 5)],
+            #"right": [const.PATH_PERSO+f"right/{i}.png" for i in range(1, 5)],
+            "idle": [const.PATH_PERSO+"perso.png"]
+        }
+
+        self._animations = {}
+
+        for key in self._frames:
+            self._animations[key] = AnimationManager(self._frames[key], 5)
+
+        self._current_animation: AnimationManager = self._animations["idle"]
+
     def move(self, amount: tuple[int, int]):
         self._position_perso_unit = tuple((self._position_perso_unit[0] + amount[0], self._position_perso_unit[1] + amount[1]))
+
+        # TODO: Animation de déplacement
 
     def get_position(self):
         return self._position_perso_unit
@@ -30,7 +48,7 @@ class CharManager():
         h_px_per_unit = self._fen.get_width() / (const.MAP_WIDTH + 2)
         v_px_per_unit = self._fen.get_height() / (const.MAP_HEIGHT + 2)
 
-        editable_perso = self._perso.copy()
+        editable_perso = self._current_animation.tick()
         editable_perso = pygame.transform.scale(editable_perso, (int(h_px_per_unit*const.PERSO_H_SCALE), int(v_px_per_unit*const.PERSO_V_SCALE)))
 
         pos_in_pixels = (
@@ -45,3 +63,7 @@ class CharManager():
 
     def has_key(self):
         return self.key
+
+    def set_animation(self, animation: str):
+        if animation in self._animations:
+            self._current_animation = self._animations[animation]

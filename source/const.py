@@ -16,7 +16,7 @@ LEFT=(-1,0)
 RIGHT=(1,0)
 
 # Chemins graphismes
-PATH_PERSO = "ressources/images/perso.png"
+PATH_PERSO = "ressources/images/perso/"
 PATH_BACKGROUND = "ressources/images/fond.jpg"
 PATH_CLE = "ressources/images/Key_anim"
 
