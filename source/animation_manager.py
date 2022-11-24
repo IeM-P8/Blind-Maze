@@ -14,3 +14,7 @@ class AnimationManager():
                 self.current_sprite = 0
         
         return self.sprites[self.current_sprite]
+
+    def reset(self):
+        self.current_sprite = 0
+        self.current_sprite_duration = 0
