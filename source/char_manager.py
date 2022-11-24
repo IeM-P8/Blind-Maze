@@ -50,17 +50,16 @@ class CharManager():
 
         # Bruit de pas
         self._sound_mixer = SoundMixer()
-        # self._sound_mixer.load("footsteps.wav")
+        # self._sound_mixer.load("footstep.wav")
 
     def move(self, direction: tuple[int, int]):
-        self._position_perso_unit = tuple((self._position_perso_unit[0] + direction[0], self._position_perso_unit[1] + direction[1]))
-        # self._sound_mixer.play("footsteps.wav")
-
         if direction == const.DOWN:
             self.set_animation("down")
         elif direction == const.UP:
             self.set_animation("up")
 
+        self._position_perso_unit = tuple((self._position_perso_unit[0] + direction[0], self._position_perso_unit[1] + direction[1]))
+        # self._sound_mixer.play("footstep.wav")
 
     def set_animation(self, animation: str):
         if animation in self._animations:
