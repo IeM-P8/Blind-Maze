@@ -20,10 +20,10 @@ class CharManager():
 
         # Animations
         self._frames = {
-            # "up": [
-            #     pygame.image.load(const.PATH_PERSO+f"up/{i}.png").convert_alpha()
-            #     for i in range(1, 5)
-            # ],
+            "up": [
+                pygame.image.load(const.PATH_PERSO+f"up/{i}.png").convert_alpha()
+                for i in range(1, 5)
+            ],
             "down": [
                 pygame.image.load(const.PATH_PERSO+f"down/{i}.png").convert_alpha()
                 for i in range(1, 5)
@@ -58,6 +58,8 @@ class CharManager():
 
         if direction == const.DOWN:
             self.set_animation("down")
+        elif direction == const.UP:
+            self.set_animation("up")
 
 
     def set_animation(self, animation: str):
