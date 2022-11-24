@@ -47,11 +47,12 @@ class CharManager():
 
         self._current_animation: AnimationManager = self._animations["idle"]
 
-    def move(self, amount: tuple[int, int]):
-        self._position_perso_unit = tuple((self._position_perso_unit[0] + amount[0], self._position_perso_unit[1] + amount[1]))
+    def move(self, direction: tuple[int, int]):
+        self._position_perso_unit = tuple((self._position_perso_unit[0] + direction[0], self._position_perso_unit[1] + direction[1]))
 
-        if amount == const.DOWN:
+        if direction == const.DOWN:
             self.set_animation("down")
+        
 
     def set_animation(self, animation: str):
         if animation in self._animations:
