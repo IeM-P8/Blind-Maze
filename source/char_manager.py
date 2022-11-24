@@ -19,11 +19,25 @@ class CharManager():
 
         # Animations
         self._frames = {
-            "up": [const.PATH_PERSO+f"up/{i}.png" for i in range(1, 5)],
-            #"down": [const.PATH_PERSO+f"down/{i}.png" for i in range(1, 5)],
-            #"left": [const.PATH_PERSO+f"left/{i}.png" for i in range(1, 5)],
-            #"right": [const.PATH_PERSO+f"right/{i}.png" for i in range(1, 5)],
-            "idle": [const.PATH_PERSO+"perso.png"]
+            "up": [
+                pygame.image.load(const.PATH_PERSO+f"up/{i}.png").convert_alpha()
+                for i in range(1, 5)
+            ],
+            #"down": [
+                # pygame.image.load(const.PATH_PERSO+f"down/{i}.png").convert_alpha()
+                # for i in range(1, 5)
+            # ],
+            #"left": [
+                # pygame.image.load(const.PATH_PERSO+f"left/{i}.png").convert_alpha()
+                # for i in range(1, 5)
+            # ],
+            #"right": [
+                # pygame.image.load(const.PATH_PERSO+f"right/{i}.png").convert_alpha()
+                # for i in range(1, 5)
+            # ],
+            "idle": [
+                pygame.image.load(const.PATH_PERSO+"perso.png").convert_alpha()
+            ]
         }
 
         self._animations = {}

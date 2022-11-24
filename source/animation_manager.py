@@ -1,5 +1,7 @@
+import pygame
+
 class AnimationManager():
-    def __init__(self, sprites: list, sprite_duration: int):
+    def __init__(self, sprites: list[pygame.surface.Surface], sprite_duration: int):
         self.sprites = sprites
         self.sprite_duration = sprite_duration
         self.current_sprite = 0
