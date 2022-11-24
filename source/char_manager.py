@@ -19,14 +19,14 @@ class CharManager():
 
         # Animations
         self._frames = {
-            "up": [
-                pygame.image.load(const.PATH_PERSO+f"up/{i}.png").convert_alpha()
+            # "up": [
+            #     pygame.image.load(const.PATH_PERSO+f"up/{i}.png").convert_alpha()
+            #     for i in range(1, 5)
+            # ],
+            "down": [
+                pygame.image.load(const.PATH_PERSO+f"down/{i}.png").convert_alpha()
                 for i in range(1, 5)
             ],
-            #"down": [
-                # pygame.image.load(const.PATH_PERSO+f"down/{i}.png").convert_alpha()
-                # for i in range(1, 5)
-            # ],
             #"left": [
                 # pygame.image.load(const.PATH_PERSO+f"left/{i}.png").convert_alpha()
                 # for i in range(1, 5)
