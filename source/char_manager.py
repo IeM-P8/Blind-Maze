@@ -50,7 +50,12 @@ class CharManager():
     def move(self, amount: tuple[int, int]):
         self._position_perso_unit = tuple((self._position_perso_unit[0] + amount[0], self._position_perso_unit[1] + amount[1]))
 
-        # TODO: Animation de déplacement
+        if amount == const.DOWN:
+            self.set_animation("down")
+
+    def set_animation(self, animation: str):
+        if animation in self._animations:
+            self._current_animation = self._animations[animation]
 
     def get_position(self):
         return self._position_perso_unit
@@ -77,7 +82,3 @@ class CharManager():
 
     def has_key(self):
         return self.key
-
-    def set_animation(self, animation: str):
-        if animation in self._animations:
-            self._current_animation = self._animations[animation]
