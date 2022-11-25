@@ -166,6 +166,12 @@ class GameManager():
 
         self.fen.blit(sprite, (x_cle, y_cle))
 
+    def ariane(self):
+        print("Utilisation du fil d'Ariane")
+        # TODO: Blackout
+        self.perso_mngr.set_postion((const.MAP_WIDTH - 1, const.MAP_HEIGHT - 1))
+        # TODO: Retour image
+
     def get_maze(self):
         return [line[:] for line in self.maze]
 

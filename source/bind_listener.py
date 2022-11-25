@@ -52,3 +52,7 @@ class BindManager():
                     self.mixer.play(const.BASE_WALL_SOUND+"3.wav")
                 else:
                     self.char_mngr.move(const.LEFT)
+
+            # Aide pour les nuls
+            elif event.key == pl.K_r:
+                self.game_mngr.ariane()
