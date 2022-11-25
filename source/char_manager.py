@@ -55,6 +55,7 @@ class CharManager():
     def move(self, direction: tuple[int, int]):
         # TODO: Reste des anim de marche
         # TODO: Fluidité déplacement
+        # TODO: Bruit de pas
         if direction == const.DOWN:
             self.set_animation("down")
         elif direction == const.UP:
