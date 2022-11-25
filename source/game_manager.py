@@ -17,7 +17,7 @@ class GameManager():
     def __init__(self):
         #Initialisation
         pygame.init()
-        pygame.display.set_caption("Pygame Window")
+        pygame.display.set_caption("Blind Maze")
         self.fen = pygame.display.set_mode(const.RESOLUTION, pl.FULLSCREEN)
         pygame.key.set_repeat(500, 500)
         self._is_started = False
