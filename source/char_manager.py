@@ -56,6 +56,7 @@ class CharManager():
         # TODO: Reste des anim de marche
         # TODO: Fluidité déplacement
         # TODO: Bruit de pas
+        # TODO: Fin anim de marche
         if direction == const.DOWN:
             self.set_animation("down")
         elif direction == const.UP:
