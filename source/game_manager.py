@@ -76,7 +76,6 @@ class GameManager():
         # TODO: Vraie gestion de porte
         # TODO: Célébration
         if self.perso_mngr.get_position() == (0, 0) and self.perso_mngr.has_key():
-            print("Gagné !")
             self.sound_mixer.chain([const.BASE_OPEN_SOUND+"DoorOpening.wav"])
             self.stop()
 
@@ -167,7 +166,6 @@ class GameManager():
         self.fen.blit(sprite, (x_cle, y_cle))
 
     def ariane(self):
-        print("Utilisation du fil d'Ariane")
         # TODO: Blackout
         self.perso_mngr.set_postion((const.MAP_WIDTH - 1, const.MAP_HEIGHT - 1))
         # TODO: Retour image
