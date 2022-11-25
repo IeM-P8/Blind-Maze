@@ -102,9 +102,11 @@ class GameManager():
         self.perso_mngr.blit()
 
         # Clé
-        # TODO: Aura de la clé
         if self.key_cell.key:
             self.draw_key()
+        # TODO: Aura de la clé
+
+        # TODO: Nuages
 
         # Display
         pygame.display.flip()
