@@ -68,6 +68,7 @@ class CharManager():
     def set_animation(self, animation: str):
         if animation in self._animations:
             self._current_animation = self._animations[animation]
+        self._current_animation.reset()
 
     def get_position(self):
         return self._position_perso_unit
