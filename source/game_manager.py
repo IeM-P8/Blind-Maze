@@ -94,6 +94,8 @@ class GameManager():
     def update(self):
         self.fen.fill((0, 0, 0))
 
+        # TODO: Fond de map
+
         # Dessin du cadre
         h_px_per_unit = self.fen.get_width() / (const.MAP_WIDTH + 2)
         v_px_per_unit = self.fen.get_height() / (const.MAP_HEIGHT + 2)
@@ -107,6 +109,8 @@ class GameManager():
 
         # Labyrinthe
         self.draw_maze()
+
+        # TODO: Affichage cases départ et arrivée
 
         # Character
         self.perso_mngr.blit()
