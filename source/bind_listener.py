@@ -56,3 +56,5 @@ class BindManager():
             # Aide pour les nuls
             elif event.key == pl.K_r:
                 self.game_mngr.ariane()
+
+            # TODO: Coup d'épée
