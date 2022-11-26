@@ -74,15 +74,23 @@ class GameManager():
 
         # Enemis
         for ennemy in self.ennemies:
+            # Mort
             if self.perso_mngr.get_position() == (ennemy.x, ennemy.y) and ennemy.ennemi:
                 self.perso_mngr.kill()
             
+            # Proche
             else:
                 for delta_x in range(-1, 2):
                     for delta_y in range(-1, 2):
-                        if self.perso_mngr.get_position() == (ennemy.x + delta_x, ennemy.y + delta_y):
+                        if self.perso_mngr.get_position() == (ennemy.x - delta_x, ennemy.y - delta_y):
                             if not pygame.mixer.get_busy():
-                                self.sound_mixer.play(const.NAME_ENNEMY_SOUND)
+                                # TODO: Bloquer les murs
+                                
+                                direction = 0 if delta_y == -1 else \
+                                            2 if delta_y == 1 else \
+                                            3 if delta_x == -1 else \
+                                            1
+                                self.sound_mixer.play(const.BASE_ENNEMY_SOUND+f"{direction}.wav")
 
         # Ouverture de porte
         # TODO: Vraie gestion de porte

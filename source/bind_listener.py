@@ -19,7 +19,8 @@ class BindManager():
     def handle(self, event):
         # Préparation des valeurs utiles
         pos = self.char_mngr.get_position()
-        cell = self.game_mngr.get_maze()[pos[1]][pos[0]]
+        maze = self.game_mngr.get_maze()
+        cell = maze[pos[1]][pos[0]]
 
         # Alt+F4 et autres
         if event.type == pl.QUIT:
@@ -57,4 +58,25 @@ class BindManager():
             elif event.key == pl.K_r:
                 self.game_mngr.ariane()
 
-            # TODO: Coup d'épée
+            # TODO: Bruit raté
+            # TODO: Bloquer mur
+            # Attaque
+            elif event.key == pl.K_UP:
+                if pos[1] > 0 and maze[pos[1]-1][pos[0]].ennemi:
+                    maze[pos[1]-1][pos[0]].ennemi = False
+                    self.mixer.play(const.BASE_SWORD_SOUND+"0.wav")
+
+            elif event.key == pl.K_RIGHT:
+                if pos[0] < const.MAP_WIDTH-1 and maze[pos[1]][pos[0]+1].ennemi:
+                    maze[pos[1]][pos[0]+1].ennemi = False
+                    self.mixer.play(const.BASE_SWORD_SOUND+"1.wav")
+
+            elif event.key == pl.K_DOWN:
+                if pos[1] < const.MAP_HEIGHT-1 and maze[pos[1]+1][pos[0]].ennemi:
+                    maze[pos[1]+1][pos[0]].ennemi = False
+                    self.mixer.play(const.BASE_SWORD_SOUND+"2.wav")
+
+            elif event.key == pl.K_LEFT:
+                if pos[0] > 0 and maze[pos[1]][pos[0]-1].ennemi:
+                    maze[pos[1]][pos[0]-1].ennemi = False
+                    self.mixer.play(const.BASE_SWORD_SOUND+"3.wav")

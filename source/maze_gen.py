@@ -50,7 +50,7 @@ def maze_gen():
     # Ajout de deux ennemis
     l_ennemis:list[case.Case] = []
 
-    for _ in range(2):
+    for _ in range(const.AMOUNT_ENNEMIES):
         ennemi_cell: case.Case = grid[random.randint(1, rows - 2)][random.randint(1, cols - 2)]
         if ennemi_cell not in l_ennemis and ennemi_cell != key_cell:
             ennemi_cell.ennemi = True
