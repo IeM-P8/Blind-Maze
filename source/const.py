@@ -8,6 +8,7 @@ COLOR_WALL: tuple[int, int, int] = (255, 0, 0)
 MAP_WIDTH: int = 10
 MAP_HEIGHT: int = 10
 PLAYER_SPAWN: tuple[int, int] = (MAP_WIDTH-1, MAP_HEIGHT-1)
+AMOUNT_ENNEMIES: int = 2
 
 # Controles
 UP: tuple[int, int] = (0,-1)
@@ -28,3 +29,5 @@ BASE_CLOSED_SOUND: str = "DoorClosed/"
 NAME_KEY_SOUND: str = "SwordStrike/SwordStrike.wav"
 BASE_SWORD_SOUND: str = "SwordStrike/"
 BASE_WALL_SOUND: str = "WallHiting/"
+NAME_ENNEMY_SOUND: str = "Gobelin.wav"
+NAME_DEATH_SOUND: str = "Death.wav"

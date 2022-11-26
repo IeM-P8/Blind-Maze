@@ -6,11 +6,12 @@ class Case():
         self.y = y
         self.grid = grid
 
-        self.visited = False
-        self.current = False
-        self.key = False
+        self.visited: bool = False
+        self.current: bool = False
+        self.key: bool = False
+        self.ennemi: bool = False
         
-        self.walls = [True,True,True,True] # top , right , bottom , left
+        self.walls: list[bool] = [True,True,True,True] # top , right , bottom , left
         
         # neighbors
         self.neighbors = []

@@ -47,13 +47,20 @@ def maze_gen():
     key_cell: case.Case = grid[random.randint(1, rows - 2)][random.randint(1, cols - 2)]
     key_cell.key = True
 
-    # TODO: Ajout ennemis
+    # Ajout de deux ennemis
+    l_ennemis:list[case.Case] = []
+
+    for _ in range(2):
+        ennemi_cell: case.Case = grid[random.randint(1, rows - 2)][random.randint(1, cols - 2)]
+        if ennemi_cell not in l_ennemis and ennemi_cell != key_cell:
+            ennemi_cell.ennemi = True
+            l_ennemis.append(ennemi_cell)
 
     # Terrain de jeu terminé
-    return grid, key_cell
+    return grid, key_cell, l_ennemis
 
 
-def removeWalls(current_cell,next_cell):
+def removeWalls(current_cell: case.Case, next_cell: case.Case):
     d_x = current_cell.x - next_cell.x
     d_y = current_cell.y - next_cell.y
     if d_x == -1: # À droite de current

@@ -34,7 +34,7 @@ class GameManager():
         self.sound_mixer.load(const.BASE_OPEN_SOUND+"DoorOpening.wav")
 
         # Création du labyrinthe
-        self.maze, self.key_cell = maze_gen.maze_gen()
+        self.maze, self.key_cell, self.ennemies = maze_gen.maze_gen()
 
         # Gestion animations
         key_animations = []
@@ -71,6 +71,18 @@ class GameManager():
             self.key_cell.key = False
             self.perso_mngr.give_key()
             self.sound_mixer.play(const.NAME_KEY_SOUND)
+
+        # Enemis
+        for ennemy in self.ennemies:
+            if self.perso_mngr.get_position() == (ennemy.x, ennemy.y) and ennemy.ennemi:
+                self.perso_mngr.kill()
+            
+            else:
+                for delta_x in range(-1, 2):
+                    for delta_y in range(-1, 2):
+                        if self.perso_mngr.get_position() == (ennemy.x + delta_x, ennemy.y + delta_y):
+                            if not pygame.mixer.get_busy():
+                                self.sound_mixer.play(const.NAME_ENNEMY_SOUND)
 
         # Ouverture de porte
         # TODO: Vraie gestion de porte
