@@ -47,6 +47,8 @@ def maze_gen():
     key_cell: case.Case = grid[random.randint(1, rows - 2)][random.randint(1, cols - 2)]
     key_cell.key = True
 
+    # TODO: Ajout ennemis
+
     # Terrain de jeu terminé
     return grid, key_cell
 

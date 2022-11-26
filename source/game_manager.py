@@ -168,7 +168,6 @@ class GameManager():
     def ariane(self):
         # TODO: Blackout
         self.perso_mngr.set_postion((const.MAP_WIDTH - 1, const.MAP_HEIGHT - 1))
-        # TODO: Retour image
 
     def get_maze(self):
         return [line[:] for line in self.maze]
