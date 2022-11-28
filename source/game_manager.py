@@ -69,6 +69,7 @@ class GameManager():
             self.check_special_positions()
 
         # Fin du jeu
+        # TODO: Animation fin
         pygame.quit()
 
     def check_special_positions(self):
@@ -140,8 +141,8 @@ class GameManager():
             self.fen.blit(resized, (h_px_per_unit * (i + 1), 0))
             self.fen.blit(rotated, (h_px_per_unit * (i + 1), v_px_per_unit * (const.MAP_HEIGHT + 1)))
 
-        # Labyrinthe
-        self.draw_maze()
+        # Labyrinthe (debug only)
+        # self.draw_maze()
 
         # TODO: Affichage cases départ et arrivée
 
@@ -152,6 +153,7 @@ class GameManager():
         if self.key_cell.key:
             self.draw_key()
         # TODO: Aura de la clé
+
 
         # TODO: Nuages
 
@@ -208,6 +210,7 @@ class GameManager():
     def draw_key(self):
         # Tous ces calculs servent à centrer la clé sur la case
         sprite: pygame.surface.Surface = self.key_animations.tick()
+        halo: pygame.surface.Surface = pygame.image.load(const.PATH_CLE+"halo.png")
 
         h_px_per_unit = self.fen.get_width() / (const.MAP_WIDTH + 2)
         v_px_per_unit = self.fen.get_height() / (const.MAP_HEIGHT + 2)
@@ -215,9 +218,17 @@ class GameManager():
         key_x_in_cell = h_px_per_unit / 2 - sprite.get_width() / 2
         key_y_in_cell = v_px_per_unit / 2 - sprite.get_height() / 2
 
-        x_cle = (self.key_cell.x + 1) * h_px_per_unit + key_x_in_cell
-        y_cle = (self.key_cell.y + 1) * v_px_per_unit + key_y_in_cell
+        cell_x = (self.key_cell.x + 1) * h_px_per_unit
+        cell_y = (self.key_cell.y + 1) * v_px_per_unit
 
+        x_cle = cell_x + key_x_in_cell
+        y_cle = cell_y + key_y_in_cell
+
+        x_halo = cell_x + h_px_per_unit / 1.5 - halo.get_width() / 2
+        y_halo = cell_y + v_px_per_unit*1.25 - halo.get_height() / 2
+
+        halo = pygame.transform.scale(halo, (2*h_px_per_unit, 2*v_px_per_unit))
+        self.fen.blit(halo, (x_halo, y_halo))
         self.fen.blit(sprite, (x_cle, y_cle))
 
     def ariane(self):
