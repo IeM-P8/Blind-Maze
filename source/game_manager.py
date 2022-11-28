@@ -26,7 +26,7 @@ class GameManager():
         self._border = pygame.image.load(const.PATH_CADRE).convert()
 
         # Managers de ressources
-        self.perso_mngr = char_manager.CharManager(self.fen)
+        self.perso_mngr = char_manager.CharManager(self.fen, self)
         self.bind_mngr = bind_listener.BindManager(self.perso_mngr, self)
         self.sound_mixer = sound_mixer.SoundMixer()
 
@@ -80,22 +80,36 @@ class GameManager():
 
         # Enemis
         for ennemy in self.ennemies:
-            # Mort
-            if self.perso_mngr.get_position() == (ennemy.x, ennemy.y) and ennemy.ennemi:
-                self.perso_mngr.kill()
-            
-            # Proche
-            else:
-                for delta in range(-1, 2):
-                    direction = -1
-                    if self.perso_mngr.get_position() == (ennemy.x + delta, ennemy.y) and ennemy.ennemi:
-                        direction = 0 if delta == -1 else 2 if delta == 1 else -1
-                    elif self.perso_mngr.get_position() == (ennemy.x, ennemy.y + delta) and ennemy.ennemi:
-                        direction = 1 if delta == 1 else 3 if delta == -1 else -1
+            if ennemy.ennemi :
+                # Mort
+                if self.perso_mngr.get_position() == (ennemy.x, ennemy.y) and ennemy.ennemi:
+                    self.perso_mngr.kill()
+                
+                # Proche
+                else:
+                    if(
+                        self.perso_mngr.get_position() == (ennemy.x + 1, ennemy.y) and
+                        not ennemy.walls[1]
+                    ):
+                        self.sound_mixer.play(const.BASE_ENNEMY_SOUND+"3.wav")
 
-                                
-                    if direction >= 0:
-                        self.sound_mixer.play(const.BASE_ENNEMY_SOUND+f"{direction}.wav")
+                    elif(
+                        self.perso_mngr.get_position() == (ennemy.x - 1, ennemy.y) and
+                        not ennemy.walls[3]
+                    ):
+                        self.sound_mixer.play(const.BASE_ENNEMY_SOUND+"1.wav")
+
+                    elif(
+                        self.perso_mngr.get_position() == (ennemy.x, ennemy.y + 1) and
+                        not ennemy.walls[2]
+                    ):
+                        self.sound_mixer.play(const.BASE_ENNEMY_SOUND+"0.wav")
+
+                    elif(
+                        self.perso_mngr.get_position() == (ennemy.x, ennemy.y - 1) and
+                        not ennemy.walls[0]
+                    ):
+                        self.sound_mixer.play(const.BASE_ENNEMY_SOUND+"2.wav")
                         
         # Ouverture de porte
         if self.perso_mngr.get_position() == (0, 0) and self.perso_mngr.has_key():
@@ -116,8 +130,8 @@ class GameManager():
         # TODO: Fond de map
 
         # Dessin du cadre
-        h_px_per_unit = self.fen.get_width() / (const.MAP_WIDTH + 2)
-        v_px_per_unit = self.fen.get_height() / (const.MAP_HEIGHT + 2)
+        h_px_per_unit = self.fen.get_width() // (const.MAP_WIDTH + 2)
+        v_px_per_unit = self.fen.get_height() // (const.MAP_HEIGHT + 2)
 
         resized = pygame.transform.scale(self._border, (h_px_per_unit,v_px_per_unit ))
         rotated = pygame.transform.rotate(resized, 180)
@@ -140,6 +154,12 @@ class GameManager():
         # TODO: Aura de la clé
 
         # TODO: Nuages
+
+        # FIXME: Temporaire
+        ennemy: case.Case
+        for ennemy in self.ennemies:
+            if ennemy.ennemi:
+                pygame.draw.rect(self.fen, (255, 0, 255), ((ennemy.x+1) * h_px_per_unit +8, (ennemy.y+1) * v_px_per_unit +5, h_px_per_unit-10, v_px_per_unit-10))
 
         # Display
         pygame.display.flip()
@@ -202,7 +222,7 @@ class GameManager():
 
     def ariane(self):
         # TODO: Blackout
-        self.perso_mngr.set_postion((const.MAP_WIDTH - 1, const.MAP_HEIGHT - 1))
+        self.perso_mngr.set_position((const.MAP_WIDTH - 1, const.MAP_HEIGHT - 1))
 
     def get_maze(self):
         return [line[:] for line in self.maze]
