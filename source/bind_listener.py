@@ -58,25 +58,47 @@ class BindManager():
             elif event.key == pl.K_r:
                 self.game_mngr.ariane()
 
-            # TODO: Bruit raté
-            # TODO: Bloquer mur
             # Attaque
             elif event.key == pl.K_UP:
-                if pos[1] > 0 and maze[pos[1]-1][pos[0]].ennemi:
+                if(
+                    pos[1] > 0 and
+                    maze[pos[1]-1][pos[0]].ennemi and
+                    not cell.walls[0]
+                ):
                     maze[pos[1]-1][pos[0]].ennemi = False
-                    self.mixer.play(const.BASE_SWORD_SOUND+"0.wav")
+                    self.mixer.play(const.BASE_SWORD_SOUND+"Hit0.wav")
+                else :
+                    self.mixer.play(const.BASE_SWORD_SOUND+"SwordMiss.wav")
 
             elif event.key == pl.K_RIGHT:
-                if pos[0] < const.MAP_WIDTH-1 and maze[pos[1]][pos[0]+1].ennemi:
+                if(
+                    pos[0] < const.MAP_WIDTH-1 and
+                    maze[pos[1]][pos[0]+1].ennemi and
+                    not cell.walls[1]
+                ):
                     maze[pos[1]][pos[0]+1].ennemi = False
-                    self.mixer.play(const.BASE_SWORD_SOUND+"1.wav")
+                    self.mixer.play(const.BASE_SWORD_SOUND+"Hit1.wav")
+                else :
+                    self.mixer.play(const.BASE_SWORD_SOUND+"SwordMiss.wav")
 
             elif event.key == pl.K_DOWN:
-                if pos[1] < const.MAP_HEIGHT-1 and maze[pos[1]+1][pos[0]].ennemi:
+                if(
+                    pos[1] < const.MAP_HEIGHT-1 and
+                    maze[pos[1]+1][pos[0]].ennemi and
+                    not cell.walls[2]
+                ):
                     maze[pos[1]+1][pos[0]].ennemi = False
-                    self.mixer.play(const.BASE_SWORD_SOUND+"2.wav")
+                    self.mixer.play(const.BASE_SWORD_SOUND+"Hit2.wav")
+                else :
+                    self.mixer.play(const.BASE_SWORD_SOUND+"SwordMiss.wav")
 
             elif event.key == pl.K_LEFT:
-                if pos[0] > 0 and maze[pos[1]][pos[0]-1].ennemi:
+                if(
+                    pos[0] > 0 and
+                    maze[pos[1]][pos[0]-1].ennemi and
+                    not cell.walls[3]
+                ):
                     maze[pos[1]][pos[0]-1].ennemi = False
-                    self.mixer.play(const.BASE_SWORD_SOUND+"3.wav")
+                    self.mixer.play(const.BASE_SWORD_SOUND+"Hit3.wav")
+                else :
+                    self.mixer.play(const.BASE_SWORD_SOUND+"SwordMiss.wav")
