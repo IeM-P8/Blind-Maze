@@ -48,11 +48,11 @@ class GameManager():
         self.key_animations = animate.AnimationManager(key_animations, 8)
 
         # Porte fin
-        door_frames = []
+        self.door_frames = []
         for i in range(1, 18):
-            door_frames.append(pygame.image.load(f"{const.PATH_SORTIE}{i}.png"))
+            self.door_frames.append(pygame.image.load(f"{const.PATH_SORTIE}{i}.png"))
 
-        self.door_animation = animate.AnimationManager(door_frames, 8)
+        self.door_animation = animate.AnimationManager(self.door_frames, 9)
 
         # Intro
         self.intro_frames = []
@@ -144,7 +144,7 @@ class GameManager():
                 # Victoire
                 self.sound_mixer.play(const.BASE_DOOR_SOUND+"DoorOpening.wav")
 
-                for _ in range(8 * 16):
+                for _ in range(9 * len(self.door_frames)-1):
                     sprite = self.door_animation.tick()
                     full_size = pygame.transform.scale(sprite, (self.fen.get_height(), self.fen.get_height()))
 
