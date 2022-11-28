@@ -1,5 +1,6 @@
 # Libs publiques
 import pygame
+import time as t
 
 # Libs locales
 import source.const as const
@@ -124,6 +125,3 @@ class CharManager():
 
     def has_key(self):
         return self.key
-
-    def kill(self):
-        self._sound_mixer.play(const.NAME_DEATH_SOUND)

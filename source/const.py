@@ -1,4 +1,4 @@
-DEBUG = False
+DEBUG = True
 
 # Graphique
 RESOLUTION: tuple[int, int] = (1280, 720) # Inutile
@@ -26,6 +26,7 @@ PATH_CADRE: str = "ressources/images/border.png"
 PATH_SORTIE: str = "ressources/images/perso/fin/BlindManWalkingInDoor"
 PATH_INTRO: str = "ressources/images/perso/intro/"
 PATH_DOOR_CLOSED: str = "ressources/images/door.png"
+PATH_DEATH: str = "ressources/images/perso/mort/"
 
 # Chemin audio
 PATH_SOUNDS: str = "ressources/sons/"

@@ -61,6 +61,13 @@ class GameManager():
 
         self.intro_animation = animate.AnimationManager(self.intro_frames, 5)
 
+        # Mort
+        self.death_frames = []
+        for i in range(1, 22):
+            self.death_frames.append(pygame.image.load(f"{const.PATH_DEATH}{i}.png"))
+
+        self.death_animation = animate.AnimationManager(self.death_frames, 9)
+
     def loop(self):
         self.start_animation()
         # Lancement du jeu
@@ -110,7 +117,19 @@ class GameManager():
             if ennemy.ennemi :
                 # Mort
                 if self.perso_mngr.get_position() == (ennemy.x, ennemy.y) and ennemy.ennemi:
-                    self.perso_mngr.kill()
+                    for frame in range((len(self.death_frames)-1) * 9):
+                        sprite = self.death_animation.tick()
+                        full_size = pygame.transform.scale(sprite, (self.fen.get_height(), self.fen.get_height()))
+
+                        self.fen.fill((0, 0, 0))
+                        self.fen.blit(full_size, (self.fen.get_width()/2 - self.fen.get_height()/2, 0))
+                        pygame.display.flip()
+
+                        if frame == 150:
+                            self.sound_mixer.play(const.NAME_DEATH_SOUND)
+                        self._clock.tick(60)
+
+                    self.stop()
                 
                 # Proche
                 elif not pygame.mixer.get_busy():
