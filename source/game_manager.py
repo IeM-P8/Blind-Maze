@@ -86,20 +86,18 @@ class GameManager():
             
             # Proche
             else:
-                for delta_x in range(-1, 2):
-                    for delta_y in range(-1, 2):
-                        if self.perso_mngr.get_position() == (ennemy.x - delta_x, ennemy.y - delta_y):
-                            if not pygame.mixer.get_busy():
-                                # TODO: Bloquer les murs
-                                
-                                direction = 0 if delta_y == -1 else \
-                                            2 if delta_y == 1 else \
-                                            3 if delta_x == -1 else \
-                                            1
-                                self.sound_mixer.play(const.BASE_ENNEMY_SOUND+f"{direction}.wav")
+                for delta in range(-1, 2):
+                    direction = -1
+                    if self.perso_mngr.get_position() == (ennemy.x + delta, ennemy.y) and ennemy.ennemi:
+                        direction = 0 if delta == -1 else 2 if delta == 1 else -1
+                    elif self.perso_mngr.get_position() == (ennemy.x, ennemy.y + delta) and ennemy.ennemi:
+                        direction = 1 if delta == 1 else 3 if delta == -1 else -1
 
+                                
+                    if direction >= 0:
+                        self.sound_mixer.play(const.BASE_ENNEMY_SOUND+f"{direction}.wav")
+                        
         # Ouverture de porte
-        # TODO: Célébration
         if self.perso_mngr.get_position() == (0, 0) and self.perso_mngr.has_key():
             self.sound_mixer.play(const.BASE_OPEN_SOUND+"DoorOpening.wav")
 
