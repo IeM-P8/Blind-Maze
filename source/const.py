@@ -1,4 +1,4 @@
-DEBUG = True
+DEBUG = False
 
 # Graphique
 RESOLUTION: tuple[int, int] = (1280, 720) # Inutile
@@ -34,5 +34,5 @@ NAME_KEY_SOUND: str = "KeyPickup.wav"
 BASE_SWORD_SOUND: str = "Sword/"
 BASE_WALL_SOUND: str = "WallHiting/"
 BASE_ENNEMY_SOUND: str = "Gobelin/"
-NAME_DEATH_SOUND: str = "Death.wav"
+NAME_DEATH_SOUND: str = "mort.wav"
 BASE_ENNEMY_SOUND: str = "Gobelin/"
