@@ -98,8 +98,8 @@ class CharManager():
         self._position_perso_unit = coords
 
     def blit(self):
-        # FIXME
         if(
+            not const.DEBUG and
             (self._position_perso_unit[0] >= 1 or self._position_perso_unit[1] >= 1) and
             (self._position_perso_unit[0] <= const.MAP_WIDTH-2 or self._position_perso_unit[1] <= const.MAP_HEIGHT-2)
         ):

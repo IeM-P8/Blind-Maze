@@ -141,8 +141,8 @@ class GameManager():
             self.fen.blit(resized, (h_px_per_unit * (i + 1), v_px_per_unit * (const.MAP_HEIGHT + 1)))
 
         # Labyrinthe
-        # FIXME
-        # self.draw_maze()
+        if const.DEBUG:
+            self.draw_maze()
 
         # Halo début de map
         halo = pygame.image.load(const.PATH_CLE+"halo.png").convert_alpha()
@@ -156,11 +156,12 @@ class GameManager():
         # Character
         self.perso_mngr.blit()
 
-        # FIXME
-        # ennemy: case.Case
-        # for ennemy in self.ennemies:
-        #     if ennemy.ennemi:
-        #         pygame.draw.rect(self.fen, (255, 0, 255), ((ennemy.x+1) * h_px_per_unit +8, (ennemy.y+1) * v_px_per_unit +5, h_px_per_unit-10, v_px_per_unit-10))
+        # Affichage debug
+        if const.DEBUG:
+            ennemy: case.Case
+            for ennemy in self.ennemies:
+                if ennemy.ennemi:
+                    pygame.draw.rect(self.fen, (255, 0, 255), ((ennemy.x+1) * h_px_per_unit +8, (ennemy.y+1) * v_px_per_unit +5, h_px_per_unit-10, v_px_per_unit-10))
 
         # Display
         pygame.display.flip()

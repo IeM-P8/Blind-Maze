@@ -1,3 +1,5 @@
+DEBUG = False
+
 # Graphique
 RESOLUTION: tuple[int, int] = (1280, 720) # Inutile
 PERSO_H_SCALE: float = 0.6
