@@ -1,4 +1,5 @@
 # Libs publiques
+import pygame
 import pygame.locals as pl
 
 # Libs locales
@@ -66,6 +67,8 @@ class BindManager():
                     not cell.walls[0]
                 ):
                     maze[pos[1]-1][pos[0]].ennemi = False
+                    pygame.mixer.stop()
+                    self.mixer.play(const.BASE_ENNEMY_SOUND+"mort0.wav")
                     self.mixer.play(const.BASE_SWORD_SOUND+"Hit0.wav")
                 else :
                     self.mixer.play(const.BASE_SWORD_SOUND+"SwordMiss.wav")
@@ -77,6 +80,8 @@ class BindManager():
                     not cell.walls[1]
                 ):
                     maze[pos[1]][pos[0]+1].ennemi = False
+                    pygame.mixer.stop()
+                    self.mixer.play(const.BASE_ENNEMY_SOUND+"mort1.wav")
                     self.mixer.play(const.BASE_SWORD_SOUND+"Hit1.wav")
                 else :
                     self.mixer.play(const.BASE_SWORD_SOUND+"SwordMiss.wav")
@@ -88,6 +93,8 @@ class BindManager():
                     not cell.walls[2]
                 ):
                     maze[pos[1]+1][pos[0]].ennemi = False
+                    pygame.mixer.stop()
+                    self.mixer.play(const.BASE_ENNEMY_SOUND+"mort2.wav")
                     self.mixer.play(const.BASE_SWORD_SOUND+"Hit2.wav")
                 else :
                     self.mixer.play(const.BASE_SWORD_SOUND+"SwordMiss.wav")
@@ -99,6 +106,8 @@ class BindManager():
                     not cell.walls[3]
                 ):
                     maze[pos[1]][pos[0]-1].ennemi = False
+                    pygame.mixer.stop()
+                    self.mixer.play(const.BASE_ENNEMY_SOUND+"mort3.wav")
                     self.mixer.play(const.BASE_SWORD_SOUND+"Hit3.wav")
                 else :
                     self.mixer.play(const.BASE_SWORD_SOUND+"SwordMiss.wav")
