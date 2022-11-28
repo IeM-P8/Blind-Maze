@@ -46,7 +46,7 @@ class CharManager():
         self._animations = {}
 
         for key in self._frames:
-            self._animations[key] = AnimationManager(self._frames[key], 2)
+            self._animations[key] = AnimationManager(self._frames[key], 4)
 
         self._current_animation: AnimationManager = self._animations["idle"]
 
@@ -69,11 +69,11 @@ class CharManager():
         self._sound_mixer.play("Footsteps.wav")
 
         # On déplace le perso lentement
-        for i in range(10):
-            self._clock.tick(30)
+        for i in range(30):
+            self._clock.tick(60)
             self._position_perso_unit = (
-                self._position_perso_unit[0] + direction[0] / 10,
-                self._position_perso_unit[1] + direction[1] / 10
+                self._position_perso_unit[0] + direction[0] / 30,
+                self._position_perso_unit[1] + direction[1] / 30
             )
             self._parent.update()
 
