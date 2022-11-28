@@ -1,0 +1,1 @@
+START python3 main.py
