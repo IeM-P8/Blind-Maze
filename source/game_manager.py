@@ -43,12 +43,12 @@ class GameManager():
 
         self.key_animations = animate.AnimationManager(key_animations, 8)
 
-        door_animations = []
+        door_frames = []
 
         for i in range(1, 18):
-            door_animations.append(pygame.image.load(f"{const.PATH_DOOR}{i}.png"))
+            door_frames.append(pygame.image.load(f"{const.PATH_DOOR}{i}.png"))
 
-        self.door_animations = animate.AnimationManager(door_animations, 8)
+        self.door_animation = animate.AnimationManager(door_frames, 8)
 
     def loop(self):
         # Lancement du jeu
@@ -69,7 +69,6 @@ class GameManager():
             self.check_special_positions()
 
         # Fin du jeu
-        # TODO: Animation fin
         pygame.quit()
 
     def check_special_positions(self):
@@ -117,7 +116,7 @@ class GameManager():
             self.sound_mixer.play(const.BASE_OPEN_SOUND+"DoorOpening.wav")
 
             for _ in range(17):
-                sprite = self.door_animations.tick()
+                sprite = self.door_animation.tick()
                 full_size = pygame.transform.scale(sprite, (self.fen.get_width(), self.fen.get_height()))
                 self.fen.blit(full_size, (0, 0))
                 pygame.display.flip()
