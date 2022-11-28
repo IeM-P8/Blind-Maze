@@ -28,7 +28,7 @@ class CharManager():
             ],
             "down": [
                 pygame.image.load(const.PATH_PERSO+f"down/{i}.png").convert_alpha()
-                for i in range(1, 5)
+                for i in range(1, 9)
             ],
             "left": [
                 pygame.image.load(const.PATH_PERSO+f"left/{i}.png").convert_alpha()
