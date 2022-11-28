@@ -129,9 +129,9 @@ class GameManager():
                     self.fen.fill((0, 0, 0))
                     self.fen.blit(full_size, (self.fen.get_width()/2 - self.fen.get_height()/2, 0))
                     pygame.display.flip()
-                    self._clock.tick(60)
+                    self._clock.tick(30)
 
-                t.sleep(5)
+                t.sleep(2)
                 self.stop()
             else:
                 # Porte fermée
