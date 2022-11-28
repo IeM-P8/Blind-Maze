@@ -140,10 +140,9 @@ class GameManager():
             self.fen.blit(resized, (h_px_per_unit * (i + 1), 0))
             self.fen.blit(rotated, (h_px_per_unit * (i + 1), v_px_per_unit * (const.MAP_HEIGHT + 1)))
 
-        # Labyrinthe (debug only)
+        # Labyrinthe
+        # FIXME
         # self.draw_maze()
-
-        # TODO: Affichage cases départ et arrivée
 
         # Character
         self.perso_mngr.blit()
@@ -151,16 +150,12 @@ class GameManager():
         # Clé
         if self.key_cell.key:
             self.draw_key()
-        # TODO: Aura de la clé
 
-
-        # TODO: Nuages
-
-        # FIXME: Temporaire
-        ennemy: case.Case
-        for ennemy in self.ennemies:
-            if ennemy.ennemi:
-                pygame.draw.rect(self.fen, (255, 0, 255), ((ennemy.x+1) * h_px_per_unit +8, (ennemy.y+1) * v_px_per_unit +5, h_px_per_unit-10, v_px_per_unit-10))
+        # FIXME
+        # ennemy: case.Case
+        # for ennemy in self.ennemies:
+        #     if ennemy.ennemi:
+        #         pygame.draw.rect(self.fen, (255, 0, 255), ((ennemy.x+1) * h_px_per_unit +8, (ennemy.y+1) * v_px_per_unit +5, h_px_per_unit-10, v_px_per_unit-10))
 
         # Display
         pygame.display.flip()

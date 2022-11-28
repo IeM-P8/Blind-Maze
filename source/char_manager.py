@@ -98,6 +98,13 @@ class CharManager():
         self._position_perso_unit = coords
 
     def blit(self):
+        # FIXME
+        if(
+            (self._position_perso_unit[0] >= 1 or self._position_perso_unit[1] >= 1) and
+            (self._position_perso_unit[0] <= const.MAP_WIDTH-2 or self._position_perso_unit[1] <= const.MAP_HEIGHT-2)
+        ):
+            return
+
         h_px_per_unit = self._fen.get_width() / (const.MAP_WIDTH + 2)
         v_px_per_unit = self._fen.get_height() / (const.MAP_HEIGHT + 2)
 
