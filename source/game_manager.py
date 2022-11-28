@@ -56,7 +56,7 @@ class GameManager():
 
         # Intro
         self.intro_frames = []
-        for i in range(1, 20):
+        for i in range(1, 21):
             self.intro_frames.append(pygame.image.load(f"{const.PATH_INTRO}{i}.png"))
 
         self.intro_animation = animate.AnimationManager(self.intro_frames, 5)
