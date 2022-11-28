@@ -1,6 +1,7 @@
 # Libs publiques
 import pygame
 import pygame.locals as pl
+import time as t
 
 # Libs locales
 import source.const as const
@@ -115,13 +116,16 @@ class GameManager():
         if self.perso_mngr.get_position() == (0, 0) and self.perso_mngr.has_key():
             self.sound_mixer.play(const.BASE_OPEN_SOUND+"DoorOpening.wav")
 
-            for _ in range(17):
+            for _ in range(8 * 17):
                 sprite = self.door_animation.tick()
-                full_size = pygame.transform.scale(sprite, (self.fen.get_width(), self.fen.get_height()))
-                self.fen.blit(full_size, (0, 0))
-                pygame.display.flip()
-                self._clock.tick(30)
+                full_size = pygame.transform.scale(sprite, (self.fen.get_height(), self.fen.get_height()))
 
+                self.fen.fill((0, 0, 0))
+                self.fen.blit(full_size, (self.fen.get_width()/2 - self.fen.get_height()/2, 0))
+                pygame.display.flip()
+                self._clock.tick(60)
+
+            t.sleep(5)
             self.stop()
 
     def update(self):
