@@ -46,7 +46,7 @@ class CharManager():
         self._animations = {}
 
         for key in self._frames:
-            self._animations[key] = AnimationManager(self._frames[key], 4)
+            self._animations[key] = AnimationManager(self._frames[key], 6)
 
         self._current_animation: AnimationManager = self._animations["idle"]
 
