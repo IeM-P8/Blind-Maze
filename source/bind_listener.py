@@ -34,22 +34,22 @@ class BindManager():
             #Déplacements
             # TODO: Bruits de collision
             elif event.key == pl.K_z:
-                if cell.walls[0] and pos[1] > 0:
+                if cell.walls[0] and pos[1] <= 0:
                     self.mixer.play(const.BASE_WALL_SOUND+"0.wav")
                 else:
                     self.char_mngr.move(const.UP)
             elif event.key == pl.K_d:
-                if cell.walls[1] and pos[0] < const.MAP_WIDTH-1:
+                if cell.walls[1] and pos[0] >= const.MAP_WIDTH-1:
                     self.mixer.play(const.BASE_WALL_SOUND+"1.wav")
                 else:
                     self.char_mngr.move(const.RIGHT)
             elif event.key == pl.K_s:
-                if cell.walls[2] and pos[1] < const.MAP_HEIGHT-1:
+                if cell.walls[2] and pos[1] >= const.MAP_HEIGHT-1:
                     self.mixer.play(const.BASE_WALL_SOUND+"2.wav")
                 else:
                     self.char_mngr.move(const.DOWN)
             elif event.key == pl.K_q:
-                if cell.walls[3] and pos[0] > 0:
+                if cell.walls[3] and pos[0] >= 0:
                     self.mixer.play(const.BASE_WALL_SOUND+"3.wav")
                 else:
                     self.char_mngr.move(const.LEFT)
