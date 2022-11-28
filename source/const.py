@@ -24,6 +24,7 @@ PATH_BACKGROUND: str = "ressources/images/fond.jpg"
 PATH_CLE: str = "ressources/images/cle/"
 PATH_CADRE: str = "ressources/images/border.png"
 PATH_DOOR: str = "ressources/images/perso/fin/BlindManWalkingInDoor"
+PATH_INTRO: str = "ressources/images/perso/intro/"
 
 # Chemin audio
 PATH_SOUNDS: str = "ressources/sons/"

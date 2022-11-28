@@ -34,26 +34,35 @@ class GameManager():
 
         self.sound_mixer.load(const.BASE_DOOR_SOUND+"DoorOpening.wav")
         self.sound_mixer.load(const.BASE_DOOR_SOUND+"DoorLocked.wav")
+        self.sound_mixer.load("intro.wav")
 
         # Création du labyrinthe
         self.maze, self.key_cell, self.ennemies = maze_gen.maze_gen()
 
         # Gestion animations
+        # Clé
         key_animations = []
-
         for i in range(1, 6):
             key_animations.append(pygame.image.load(f"{const.PATH_CLE}{i}.png"))
 
         self.key_animations = animate.AnimationManager(key_animations, 8)
 
+        # Porte fin
         door_frames = []
-
         for i in range(1, 18):
             door_frames.append(pygame.image.load(f"{const.PATH_DOOR}{i}.png"))
 
         self.door_animation = animate.AnimationManager(door_frames, 8)
 
+        # Intro
+        self.intro_frames = []
+        for i in range(1, 20):
+            self.intro_frames.append(pygame.image.load(f"{const.PATH_INTRO}{i}.png"))
+
+        self.intro_animation = animate.AnimationManager(self.intro_frames, 5)
+
     def loop(self):
+        self.start_animation()
         # Lancement du jeu
         self._is_started = True
         # TODO: Animation début
@@ -73,6 +82,22 @@ class GameManager():
 
         # Fin du jeu
         pygame.quit()
+
+    def start_animation(self):
+        # Départ
+        self.sound_mixer.play("intro.wav")
+
+        for _ in range(len(self.intro_frames) * 5):
+            sprite = self.intro_animation.tick()
+            full_size = pygame.transform.scale(sprite, (self.fen.get_height(), self.fen.get_height()))
+
+            self.fen.fill((0, 0, 0))
+            self.fen.blit(full_size, (self.fen.get_width()/2 - self.fen.get_height()/2, 0))
+            pygame.display.flip()
+            self._clock.tick(60)
+
+        t.sleep(1)
+        self.stop()
 
     def check_special_positions(self):
         # Ramassage de clé
