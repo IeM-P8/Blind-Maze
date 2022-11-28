@@ -31,7 +31,8 @@ class GameManager():
         self.bind_mngr = bind_listener.BindManager(self.perso_mngr, self)
         self.sound_mixer = sound_mixer.SoundMixer()
 
-        self.sound_mixer.load(const.BASE_OPEN_SOUND+"DoorOpening.wav")
+        self.sound_mixer.load(const.BASE_DOOR_SOUND+"DoorOpening.wav")
+        self.sound_mixer.load(const.BASE_DOOR_SOUND+"DoorLocked.wav")
 
         # Création du labyrinthe
         self.maze, self.key_cell, self.ennemies = maze_gen.maze_gen()
@@ -113,20 +114,26 @@ class GameManager():
                         self.sound_mixer.play(const.BASE_ENNEMY_SOUND+"2.wav")
                         
         # Ouverture de porte
-        if self.perso_mngr.get_position() == (0, 0) and self.perso_mngr.has_key():
-            self.sound_mixer.play(const.BASE_OPEN_SOUND+"DoorOpening.wav")
+        if self.perso_mngr.get_position() == (0, 0) :
+            if self.perso_mngr.has_key():
+                # Victoire
+                self.sound_mixer.play(const.BASE_DOOR_SOUND+"DoorOpening.wav")
 
-            for _ in range(8 * 17):
-                sprite = self.door_animation.tick()
-                full_size = pygame.transform.scale(sprite, (self.fen.get_height(), self.fen.get_height()))
+                for _ in range(8 * 16):
+                    sprite = self.door_animation.tick()
+                    full_size = pygame.transform.scale(sprite, (self.fen.get_height(), self.fen.get_height()))
 
-                self.fen.fill((0, 0, 0))
-                self.fen.blit(full_size, (self.fen.get_width()/2 - self.fen.get_height()/2, 0))
-                pygame.display.flip()
-                self._clock.tick(60)
+                    self.fen.fill((0, 0, 0))
+                    self.fen.blit(full_size, (self.fen.get_width()/2 - self.fen.get_height()/2, 0))
+                    pygame.display.flip()
+                    self._clock.tick(60)
 
-            t.sleep(5)
-            self.stop()
+                t.sleep(5)
+                self.stop()
+            else:
+                # Porte fermée
+                # TODO: Jouer une seule fois le son
+                self.sound_mixer.play(const.BASE_DOOR_SOUND+"DoorLocked.wav")
 
     def update(self):
         self.fen.fill((0, 0, 0))
