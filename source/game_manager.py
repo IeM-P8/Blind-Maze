@@ -137,19 +137,24 @@ class GameManager():
         rotated = pygame.transform.rotate(resized, 180)
 
         for i in range(const.MAP_WIDTH):
-            self.fen.blit(resized, (h_px_per_unit * (i + 1), 0))
-            self.fen.blit(rotated, (h_px_per_unit * (i + 1), v_px_per_unit * (const.MAP_HEIGHT + 1)))
+            self.fen.blit(rotated, (h_px_per_unit * (i + 1), 0))
+            self.fen.blit(resized, (h_px_per_unit * (i + 1), v_px_per_unit * (const.MAP_HEIGHT + 1)))
 
         # Labyrinthe
         # FIXME
         # self.draw_maze()
 
-        # Character
-        self.perso_mngr.blit()
+        # Halo début de map
+        halo = pygame.image.load(const.PATH_CLE+"halo.png").convert_alpha()
+        halo = pygame.transform.scale(halo, (h_px_per_unit, v_px_per_unit))
+        self.fen.blit(halo, (const.MAP_WIDTH * h_px_per_unit, const.MAP_HEIGHT * v_px_per_unit))
 
         # Clé
         if self.key_cell.key:
             self.draw_key()
+        
+        # Character
+        self.perso_mngr.blit()
 
         # FIXME
         # ennemy: case.Case
