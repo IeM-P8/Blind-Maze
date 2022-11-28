@@ -22,6 +22,7 @@ class GameManager():
         self._is_started = False
 
         self._clock = pygame.time.Clock()
+        self.last_played = 0
 
         # Chargement des ressources
         self._border = pygame.image.load(const.PATH_CADRE).convert()
@@ -88,7 +89,7 @@ class GameManager():
                     self.perso_mngr.kill()
                 
                 # Proche
-                else:
+                elif self.last_played >= 80:
                     if(
                         self.perso_mngr.get_position() == (ennemy.x + 1, ennemy.y) and
                         not ennemy.walls[1]
@@ -112,6 +113,8 @@ class GameManager():
                         not ennemy.walls[0]
                     ):
                         self.sound_mixer.play(const.BASE_ENNEMY_SOUND+"2.wav")
+
+        self.last_played += 1
                         
         # Ouverture de porte
         if self.perso_mngr.get_position() == (0, 0) :
