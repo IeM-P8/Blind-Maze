@@ -27,8 +27,7 @@ PATH_DOOR: str = "ressources/images/perso/fin/BlindManWalkingInDoor"
 
 # Chemin audio
 PATH_SOUNDS: str = "ressources/sons/"
-BASE_OPEN_SOUND: str = "DoorOpening/"
-BASE_CLOSED_SOUND: str = "DoorClosed/"
+BASE_DOOR_SOUND: str = "Door/"
 NAME_KEY_SOUND: str = "KeyPickup.wav"
 BASE_SWORD_SOUND: str = "Sword/"
 BASE_WALL_SOUND: str = "WallHiting/"
