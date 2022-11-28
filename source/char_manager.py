@@ -101,7 +101,8 @@ class CharManager():
         if(
             not const.DEBUG and
             (self._position_perso_unit[0] >= 1 or self._position_perso_unit[1] >= 1) and
-            (self._position_perso_unit[0] <= const.MAP_WIDTH-2 or self._position_perso_unit[1] <= const.MAP_HEIGHT-2)
+            (self._position_perso_unit[0] <= const.MAP_WIDTH-2 or self._position_perso_unit[1] <= const.MAP_HEIGHT-2) and
+            (self._position_perso_unit[0] >=  0.5 or self._position_perso_unit[1] >= 0.5)
         ):
             return
 

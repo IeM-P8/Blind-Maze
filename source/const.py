@@ -1,4 +1,4 @@
-DEBUG = False
+DEBUG = True
 
 # Graphique
 RESOLUTION: tuple[int, int] = (1280, 720) # Inutile
@@ -7,8 +7,8 @@ PERSO_V_SCALE: float = 0.8
 COLOR_WALL: tuple[int, int, int] = (255, 0, 0)
 
 # Map (taille mini = 5x5)
-MAP_WIDTH: int = 10
-MAP_HEIGHT: int = 8
+MAP_WIDTH: int = 6
+MAP_HEIGHT: int = 5
 PLAYER_SPAWN: tuple[int, int] = (MAP_WIDTH-1, MAP_HEIGHT-1)
 AMOUNT_ENNEMIES: int = 2
 
@@ -23,8 +23,9 @@ PATH_PERSO: str = "ressources/images/perso/"
 PATH_BACKGROUND: str = "ressources/images/fond.jpg"
 PATH_CLE: str = "ressources/images/cle/"
 PATH_CADRE: str = "ressources/images/border.png"
-PATH_DOOR: str = "ressources/images/perso/fin/BlindManWalkingInDoor"
+PATH_SORTIE: str = "ressources/images/perso/fin/BlindManWalkingInDoor"
 PATH_INTRO: str = "ressources/images/perso/intro/"
+PATH_DOOR_CLOSED: str = "ressources/images/door.png"
 
 # Chemin audio
 PATH_SOUNDS: str = "ressources/sons/"

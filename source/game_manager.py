@@ -25,7 +25,8 @@ class GameManager():
         self.last_played = 0
 
         # Chargement des ressources
-        self._border = pygame.image.load(const.PATH_CADRE).convert()
+        self._border = pygame.image.load(const.PATH_CADRE).convert_alpha()
+        self._door = pygame.image.load(const.PATH_DOOR_CLOSED).convert_alpha()
 
         # Managers de ressources
         self.perso_mngr = char_manager.CharManager(self.fen, self)
@@ -50,7 +51,7 @@ class GameManager():
         # Porte fin
         door_frames = []
         for i in range(1, 18):
-            door_frames.append(pygame.image.load(f"{const.PATH_DOOR}{i}.png"))
+            door_frames.append(pygame.image.load(f"{const.PATH_SORTIE}{i}.png"))
 
         self.door_animation = animate.AnimationManager(door_frames, 8)
 
@@ -65,7 +66,6 @@ class GameManager():
         self.start_animation()
         # Lancement du jeu
         self._is_started = True
-        # TODO: Animation début
         # TODO: Musique de fond
         while self._is_started:
             self._clock.tick(60)
@@ -87,7 +87,7 @@ class GameManager():
         # Départ
         self.sound_mixer.play("intro.wav")
 
-        for _ in range(len(self.intro_frames) * 5):
+        for _ in range((len(self.intro_frames)-1) * 5):
             sprite = self.intro_animation.tick()
             full_size = pygame.transform.scale(sprite, (self.fen.get_height(), self.fen.get_height()))
 
@@ -192,6 +192,9 @@ class GameManager():
         if self.key_cell.key:
             self.draw_key()
         
+        # Porte
+        self.fen.blit(self._door, (h_px_per_unit, v_px_per_unit))
+
         # Character
         self.perso_mngr.blit()
 
