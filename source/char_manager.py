@@ -24,7 +24,7 @@ class CharManager():
         self._frames = {
             "up": [
                 pygame.image.load(const.PATH_PERSO+f"up/{i}.png").convert_alpha()
-                for i in range(1, 5)
+                for i in range(1, 9)
             ],
             "down": [
                 pygame.image.load(const.PATH_PERSO+f"down/{i}.png").convert_alpha()
