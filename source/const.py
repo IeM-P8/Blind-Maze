@@ -21,6 +21,7 @@ PATH_PERSO: str = "ressources/images/perso/"
 PATH_BACKGROUND: str = "ressources/images/fond.jpg"
 PATH_CLE: str = "ressources/images/cle/"
 PATH_CADRE: str = "ressources/images/border.png"
+PATH_DOOR: str = "ressources/images/perso/fin/BlindManWalkingInDoor"
 
 # Chemin audio
 PATH_SOUNDS: str = "ressources/sons/"
@@ -32,4 +33,3 @@ BASE_WALL_SOUND: str = "WallHiting/"
 BASE_ENNEMY_SOUND: str = "Gobelin/"
 NAME_DEATH_SOUND: str = "Death.wav"
 BASE_ENNEMY_SOUND: str = "Gobelin/"
-PATH_DOOR: str = "ressources/images/perso/fin/BlindManWalkingInDoor"
