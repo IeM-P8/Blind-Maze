@@ -28,14 +28,14 @@ class CharManager():
                 pygame.image.load(const.PATH_PERSO+f"down/{i}.png").convert_alpha()
                 for i in range(1, 5)
             ],
-            #"left": [
-                # pygame.image.load(const.PATH_PERSO+f"left/{i}.png").convert_alpha()
-                # for i in range(1, 5)
-            # ],
-            #"right": [
-                # pygame.image.load(const.PATH_PERSO+f"right/{i}.png").convert_alpha()
-                # for i in range(1, 5)
-            # ],
+            "left": [
+                pygame.image.load(const.PATH_PERSO+f"left/{i}.png").convert_alpha()
+                for i in range(1, 7)
+            ],
+            "right": [
+                pygame.image.load(const.PATH_PERSO+f"right/{i}.png").convert_alpha()
+                for i in range(1, 7)
+            ],
             "idle": [
                 pygame.image.load(const.PATH_PERSO+"perso.png").convert_alpha()
             ]
@@ -60,6 +60,10 @@ class CharManager():
             self.set_animation("down")
         elif direction == const.UP:
             self.set_animation("up")
+        elif direction == const.LEFT:
+            self.set_animation("left")
+        elif direction == const.RIGHT:
+            self.set_animation("right")
 
         self._position_perso_unit = tuple((self._position_perso_unit[0] + direction[0], self._position_perso_unit[1] + direction[1]))
         self._sound_mixer.play("Footsteps.wav")
