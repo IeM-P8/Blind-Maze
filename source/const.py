@@ -7,8 +7,8 @@ PERSO_V_SCALE: float = 0.8
 COLOR_WALL: tuple[int, int, int] = (255, 0, 0)
 
 # Map (taille mini = 5x5)
-MAP_WIDTH: int = 6
-MAP_HEIGHT: int = 5
+MAP_WIDTH: int = 10
+MAP_HEIGHT: int = 8
 PLAYER_SPAWN: tuple[int, int] = (MAP_WIDTH-1, MAP_HEIGHT-1)
 AMOUNT_ENNEMIES: int = 2
 
