@@ -166,20 +166,22 @@ class GameManager():
                 # Victoire
                 self.sound_mixer.play(const.BASE_DOOR_SOUND+"DoorOpening.wav")
 
-                for _ in range(9 * len(self.door_frames)-1):
+                for frame in range(9 * len(self.door_frames)-1):
                     sprite = self.door_animation.tick()
                     full_size = pygame.transform.scale(sprite, (self.fen.get_height(), self.fen.get_height()))
 
                     self.fen.fill((0, 0, 0))
                     self.fen.blit(full_size, (self.fen.get_width()/2 - self.fen.get_height()/2, 0))
                     pygame.display.flip()
-                    self._clock.tick(30)
+
+                    if frame in [20, 40, 60, 80, 100, 120]:
+                        self.sound_mixer.play("Footsteps.wav")
+                    self._clock.tick(40)
 
                 t.sleep(2)
                 self.stop()
-            else:
+            elif not pygame.mixer.get_busy():
                 # Porte fermée
-                # TODO: Jouer une seule fois le son
                 self.sound_mixer.play(const.BASE_DOOR_SOUND+"DoorLocked.wav")
 
     def update(self):
