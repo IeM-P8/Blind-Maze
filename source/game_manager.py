@@ -22,6 +22,8 @@ class GameManager():
         self._is_started = False
 
         self._clock = pygame.time.Clock()
+        self.sprite_controls = pygame.image.load("ressources/images/commands.png").convert_alpha()
+        self.sprite_controls = pygame.transform.scale(self.sprite_controls, (self.fen.get_width()//4, self.fen.get_height()//4))
 
         # Chargement des ressources
         self._border = pygame.image.load(const.PATH_CADRE).convert_alpha()
@@ -219,6 +221,9 @@ class GameManager():
         # Character
         self.perso_mngr.blit()
 
+        # Contrôles
+        self.draw_controls()
+
         # Affichage debug
         if const.DEBUG:
             ennemy: case.Case
@@ -293,6 +298,9 @@ class GameManager():
         halo = pygame.transform.scale(halo, (2*h_px_per_unit, 2*v_px_per_unit))
         self.fen.blit(halo, (x_halo, y_halo))
         self.fen.blit(sprite, (x_cle, y_cle))
+
+    def draw_controls(self):
+        self.fen.blit(self.sprite_controls, (self.fen.get_width() - self.sprite_controls.get_width(), 0))
 
     def ariane(self):
         self.perso_mngr.set_position((const.MAP_WIDTH - 1, const.MAP_HEIGHT - 1))
