@@ -1,3 +1,5 @@
+import pygame
+
 DEBUG = False
 
 # Graphique

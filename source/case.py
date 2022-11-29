@@ -1,4 +1,5 @@
 import random
+import pygame
 
 class Case():
     def __init__(self, x, y, grid):    
