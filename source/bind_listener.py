@@ -33,7 +33,6 @@ class BindManager():
                 self.game_mngr.stop()
             
             #Déplacements
-            # TODO: Bruits de collision
             elif event.key == pl.K_z:
                 if cell.walls[0] or pos[1] <= 0:
                     self.mixer.play(const.BASE_WALL_SOUND+"0.wav")

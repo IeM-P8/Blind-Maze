@@ -293,7 +293,6 @@ class GameManager():
         self.fen.blit(sprite, (x_cle, y_cle))
 
     def ariane(self):
-        # TODO: Blackout
         self.perso_mngr.set_position((const.MAP_WIDTH - 1, const.MAP_HEIGHT - 1))
 
     def get_maze(self):
