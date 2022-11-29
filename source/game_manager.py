@@ -117,6 +117,7 @@ class GameManager():
             if ennemy.ennemi :
                 # Mort
                 if self.perso_mngr.get_position() == (ennemy.x, ennemy.y) and ennemy.ennemi:
+                    self.sound_mixer.play("Footsteps.wav")
                     for frame in range((len(self.death_frames)-1) * 9):
                         sprite = self.death_animation.tick()
                         full_size = pygame.transform.scale(sprite, (self.fen.get_height(), self.fen.get_height()))
@@ -124,8 +125,10 @@ class GameManager():
                         self.fen.fill((0, 0, 0))
                         self.fen.blit(full_size, (self.fen.get_width()/2 - self.fen.get_height()/2, 0))
                         pygame.display.flip()
-
-                        if frame == 150:
+                        
+                        if frame == 30 or frame == 60:
+                            self.sound_mixer.play("Footsteps.wav")
+                        elif frame == 150:
                             self.sound_mixer.play(const.NAME_DEATH_SOUND)
                         self._clock.tick(60)
 
