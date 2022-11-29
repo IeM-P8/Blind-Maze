@@ -1,5 +1,4 @@
 import random
-import pygame
 import source.const as const
 import source.case as case
 
