@@ -49,7 +49,7 @@ class GameManager():
 
         # Porte fin
         self.door_frames = []
-        for i in range(1, 18):
+        for i in range(1, 21):
             self.door_frames.append(pygame.image.load(f"{const.PATH_SORTIE}{i}.png"))
 
         self.door_animation = animate.AnimationManager(self.door_frames, 9)
